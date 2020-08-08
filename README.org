@@ -1,2 +1,2 @@
-# loanmanagementsytem
+* Loan management system
 Simple loan management system
