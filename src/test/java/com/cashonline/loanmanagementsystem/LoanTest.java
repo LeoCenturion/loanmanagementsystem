@@ -1,5 +1,7 @@
 package com.cashonline.loanmanagementsystem;
 
+import com.cashonline.loanmanagementsystem.model.Loan;
+import com.cashonline.loanmanagementsystem.model.Person;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +13,7 @@ class LoanTest {
 
     @BeforeEach
     public void setup(){
-        p = new Person(1,"email", "firstName", "lastName");
+        p = new Person(new Long(1),"email", "firstName", "lastName");
     }
 
     @Test
@@ -19,5 +21,6 @@ class LoanTest {
         Loan l1 = new Loan(1, 2500, p);
         assertEquals(1, l1.getId());
     }
+
 
 }

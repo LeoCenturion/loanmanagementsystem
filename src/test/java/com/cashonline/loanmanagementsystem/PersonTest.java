@@ -1,5 +1,7 @@
 package com.cashonline.loanmanagementsystem;
 
+import com.cashonline.loanmanagementsystem.model.Loan;
+import com.cashonline.loanmanagementsystem.model.Person;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,9 +12,9 @@ public class PersonTest {
 
     @BeforeEach
     public void setup() {
-        p = new Person(1, "email", "firstName", "lastName");
-    }
+        p = new Person((long) 1, "email", "firstName", "lastName");
 
+    }
     @Test
     public void personCreates_thenEmailIsCorrect() {
         assertEquals("email", p.getEmail());
@@ -82,7 +84,7 @@ public class PersonTest {
     @Test
     public void addLoanBelongingToOther_thenDoesntAddLoan(){
         Loan l1 = new Loan(1, 0, p);
-        Loan l2 = new Loan(2, 0, new Person(2,"","",""));
+        Loan l2 = new Loan(2, 0, new Person((long) 2,"","",""));
         Person pWithLoans = p.addLoan(l1).addLoan(l2);
 
         assertTrue(pWithLoans.getLoans().contains(l1));
