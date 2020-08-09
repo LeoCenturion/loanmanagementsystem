@@ -1,4 +1,4 @@
-package com.cashonline.loanmanagementsystem;
+package com.cashonline.loanmanagementsystem.model;
 
 import java.util.Objects;
 

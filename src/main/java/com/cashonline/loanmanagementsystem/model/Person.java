@@ -1,4 +1,4 @@
-package com.cashonline.loanmanagementsystem;
+package com.cashonline.loanmanagementsystem.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,9 +9,9 @@ final public class Person {
     private final String email;
     private final String firstName;
     private final List<Loan> loans;
-    private final Integer id;
+    private final Long id;
 
-    public Person(Integer id, String email, String firstName, String lastName) {
+    public Person(Long id, String email, String firstName, String lastName) {
         this.id = id;
         this.email = email;
         this.firstName = firstName;
@@ -79,5 +79,9 @@ final public class Person {
         ArrayList<Loan> newLoans = new ArrayList<>(loans);
         newLoans.remove(l1);
         return new Person(this, newLoans);
+    }
+
+    public long getId() {
+        return id;
     }
 }
