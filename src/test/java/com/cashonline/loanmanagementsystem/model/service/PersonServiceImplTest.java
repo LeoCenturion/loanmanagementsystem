@@ -1,53 +1,28 @@
-package com.cashonline.loanmanagementsystem.service;
+package com.cashonline.loanmanagementsystem.model.service;
 
-import com.cashonline.loanmanagementsystem.dao.PersonDAO;
+import com.cashonline.loanmanagementsystem.persistence.dao.FakePersonRepository;
+import com.cashonline.loanmanagementsystem.persistence.dao.PersonDAO;
 import com.cashonline.loanmanagementsystem.model.Person;
+import com.jasongoodwin.monads.Try;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class PersonServiceTest {
-    private PersonService ps;
+public class PersonServiceImplTest {
+    private PersonServiceImpl ps;
     private Person p;
 
-    static class PersonDaoTestImpl implements PersonDAO {
-        private final Map<Long, Person> persons;
-
-        public PersonDaoTestImpl() {
-            this.persons = new HashMap<>();
-        }
-        @Override
-        public Optional<Person> findPerson(long i){
-            return Optional.ofNullable(this.persons.get(i));
-        }
-        @Override
-        public void savePerson(Person p){
-            this.persons.putIfAbsent(p.getId(), p);
-        }
-
-        @Override
-        public void deletePerson(long l) {
-            persons.remove(l);
-        }
-
-        @Override
-        public void updatePerson(Person p) {
-            persons.put(p.getId(), p);
-        }
-    }
 
     @BeforeEach
     public void setup(){
-        PersonDAO personDAO = new PersonDaoTestImpl();
+        PersonDAO personDAO = new FakePersonRepository();
         p = new Person((long) 1, "","","");
         personDAO.savePerson(p);
 
-        ps = new PersonService(personDAO);
+        ps = new PersonServiceImpl(personDAO);
     }
 
     @Test
