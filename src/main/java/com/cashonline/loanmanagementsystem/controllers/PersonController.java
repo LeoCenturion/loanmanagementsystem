@@ -1,5 +1,6 @@
 package com.cashonline.loanmanagementsystem.controllers;
 
+import com.cashonline.loanmanagementsystem.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +20,9 @@ public class PersonController {
     }
 
     @PostMapping
-    public ResponseEntity<?> addPerson(@RequestBody PersonDTO person) {
-
+    public ResponseEntity<Person> addPerson(@RequestBody PersonDTO person) {
         return personService.addPerson(PersonDTO.toPerson(person))
-                .map(p -> ResponseEntity.ok().build())
+                .map(p -> ResponseEntity.ok().body(p))
                 .recover(e -> ResponseEntity.status(HttpStatus.CONFLICT).build());
 
     }

@@ -2,21 +2,28 @@ package com.cashonline.loanmanagementsystem.controllers;
 
 import com.cashonline.loanmanagementsystem.persistence.dao.FakePersonRepository;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.http.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.cashonline.loanmanagementsystem.controllers.dto.*;
-import com.cashonline.loanmanagementsystem.model.service.*;
 
+@ExtendWith(SpringExtension.class)
+@SpringBootTest
 class PersonControllerTest {
+
+    @Autowired
     private PersonController pc;
     private PersonDTO p;
 
     @BeforeEach()
     public void setup(){
         p = new PersonDTO( 1, "email", "firstName", "lastName");
-        PersonService ps = new PersonServiceImpl(new FakePersonRepository());
-        pc = new PersonController(ps);
+//        PersonService ps = new PersonServiceImpl(new FakePersonRepository());
+//        pc = new PersonController(ps);
     }
 
     @Test
@@ -39,7 +46,6 @@ class PersonControllerTest {
         pc.addPerson(other);
         ResponseEntity<PersonDTO> result = pc.getPerson(p.getId());
         assertEquals(p.getEmail(), result.getBody().getEmail());
-
     }
 
     @Test
@@ -74,6 +80,5 @@ class PersonControllerTest {
         ResponseEntity expected = pc.deletePerson(2);
         assertEquals(HttpStatus.OK, expected.getStatusCode());
     }
-
 
 }

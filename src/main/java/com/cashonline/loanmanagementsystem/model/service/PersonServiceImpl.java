@@ -4,6 +4,7 @@ import com.cashonline.loanmanagementsystem.persistence.dao.PersonDAO;
 import com.cashonline.loanmanagementsystem.model.Person;
 import com.jasongoodwin.monads.Try;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -14,7 +15,7 @@ public class PersonServiceImpl implements PersonService{
     private final PersonDAO personDAO;
 
     @Autowired
-    public PersonServiceImpl(PersonDAO personDAO) {
+    public PersonServiceImpl(@Qualifier("fakePersonDAO") PersonDAO personDAO) {
         this.personDAO = personDAO;
     }
 

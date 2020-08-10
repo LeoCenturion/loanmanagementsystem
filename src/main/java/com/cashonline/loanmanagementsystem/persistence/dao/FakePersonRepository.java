@@ -2,11 +2,15 @@ package com.cashonline.loanmanagementsystem.persistence.dao;
 
 import com.cashonline.loanmanagementsystem.model.Person;
 import com.jasongoodwin.monads.Try;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+@Repository
+@Qualifier("fakePersonDAO")
 public class FakePersonRepository implements PersonDAO {
     private final Map<Long, Person> persons;
 
