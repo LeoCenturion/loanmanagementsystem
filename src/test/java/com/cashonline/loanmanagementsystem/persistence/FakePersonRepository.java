@@ -1,6 +1,7 @@
-package com.cashonline.loanmanagementsystem.persistence.dao;
+package com.cashonline.loanmanagementsystem.persistence;
 
 import com.cashonline.loanmanagementsystem.model.Person;
+import com.cashonline.loanmanagementsystem.persistence.dao.PersonDAO;
 import com.jasongoodwin.monads.Try;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
