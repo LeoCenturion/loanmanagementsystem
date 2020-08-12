@@ -23,7 +23,7 @@ public class PersonServiceImpl implements PersonService{
         return personDAO.findPerson(i);
     }
 
-        public Try<Person> addPerson(Person person) {
+    public Try<Person> addPerson(Person person) {
         return personDAO.savePerson(person);
     }
 

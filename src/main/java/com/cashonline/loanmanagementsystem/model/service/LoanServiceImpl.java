@@ -10,19 +10,15 @@ import java.util.Optional;
 
 public class LoanServiceImpl {
 
-    private PersonDAO personDao;
-    private LoanDAO loanDao;
-
-    public LoanServiceImpl(PersonDAO personDao) {
-        this.personDao = personDao;
-    }
+    private final PersonDAO personDao;
+    private final LoanDAO loanDao;
 
     public LoanServiceImpl(PersonDAO personDao, LoanDAO loanDao) {
         this.personDao = personDao;
         this.loanDao = loanDao;
     }
 
-    public List<Loan> getLoanByPersonId(int i) {
+    public List<Loan> getLoanByPersonId(Long i) {
         Optional<Person> person = personDao.findPerson(i);
         return person.map(Person::getLoans).orElse(new ArrayList<>());
     }
