@@ -4,6 +4,8 @@ import com.cashonline.loanmanagementsystem.model.service.PersonServiceImpl;
 import com.cashonline.loanmanagementsystem.persistence.FakePersonRepository;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.http.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -11,15 +13,16 @@ import static org.junit.jupiter.api.Assertions.*;
 import com.cashonline.loanmanagementsystem.controllers.dto.*;
 
 @ExtendWith(SpringExtension.class)
+@SpringBootTest
 class PersonControllerTest {
 
+    @Autowired
     private PersonController pc;
     private PersonDTO p;
 
     @BeforeEach()
     public void setup(){
         p = new PersonDTO( 1, "email", "firstName", "lastName");
-        pc = new PersonController(new PersonServiceImpl(new FakePersonRepository()));
     }
 
     @Test
@@ -36,7 +39,7 @@ class PersonControllerTest {
     }
 
     @Test
-    public void whenPersonAddedTwie_onlyFirstOneRemains(){
+    public void whenPersonAddedTwice_onlyFirstOneRemains(){
         pc.addPerson(p);
         PersonDTO other = new PersonDTO(p.getId(),"changed","","");
         pc.addPerson(other);
@@ -53,7 +56,8 @@ class PersonControllerTest {
 
     @Test
     public void whenPersonDoesntExist_thenCannotGetPerson(){
-        ResponseEntity<PersonDTO> expected = pc.getPerson(p.getId());
+        Long personId = 9999L;
+        ResponseEntity<PersonDTO> expected = pc.getPerson(personId);
         assertEquals(HttpStatus.NOT_FOUND, expected.getStatusCode());
 
     }

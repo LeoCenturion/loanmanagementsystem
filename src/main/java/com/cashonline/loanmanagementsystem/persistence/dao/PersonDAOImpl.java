@@ -34,22 +34,22 @@ public class PersonDAOImpl implements PersonDAO {
 
     @Override
     public Optional<Person> findPerson(long id) {
-        return Optional.empty();
+        throw new RuntimeException("not implemented");
     }
 
     @Override
     public Try savePerson(Person p) {
-        return null;
+        throw new RuntimeException("not implemented");
     }
 
     @Override
     public void deletePerson(long l) {
-
+        throw new RuntimeException("not implemented");
     }
 
     @Override
     public void updatePerson(Person p) {
-
+        throw new RuntimeException("not implemented");
     }
 
     @Override

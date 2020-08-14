@@ -15,7 +15,7 @@ public class PersonServiceImpl implements PersonService{
     private final PersonDAO personDAO;
 
     @Autowired
-    public PersonServiceImpl(@Qualifier("fakePersonDAO") PersonDAO personDAO) {
+    public PersonServiceImpl(@Qualifier("PersonDAO") PersonDAO personDAO) {
         this.personDAO = personDAO;
     }
 
