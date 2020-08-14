@@ -1,10 +1,10 @@
 package com.cashonline.loanmanagementsystem.persistence.dao;
 
-import com.cashonline.loanmanagementsystem.model.Loan;
-import com.cashonline.loanmanagementsystem.model.service.LoanServiceImpl;
+import com.cashonline.loanmanagementsystem.model.entities.Loan;
 import com.cashonline.loanmanagementsystem.persistence.entities.LoanEntity;
 
 
+import com.cashonline.loanmanagementsystem.model.responsemodel.PagedLoans;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.support.PagedListHolder;
@@ -31,7 +31,7 @@ public class LoanDAOImpl implements LoanDAO {
     }
 
     @Override
-    public LoanServiceImpl.PagedLoans getPagedLoans(LoanServiceImpl.Page page) {
+    public PagedLoans getLoansPaged(com.cashonline.loanmanagementsystem.model.requestmodel.Page page) {
         Page<LoanEntity> pagedAnswer = repository.findAll(PageRequest.of(page.pageNumber(), page.pageSize()));
 
         List<Loan> loans = pagedAnswer.get().map(LoanEntity::toLoan).collect(toList());
@@ -39,7 +39,7 @@ public class LoanDAOImpl implements LoanDAO {
         plh.setPageSize(page.pageSize());
         plh.setPage(page.pageNumber());
 
-        return new LoanServiceImpl.PagedLoans(plh.getPageList(), pagedAnswer.getTotalPages());
+        return new PagedLoans(plh.getPageList(), pagedAnswer.getTotalPages());
 
     }
 

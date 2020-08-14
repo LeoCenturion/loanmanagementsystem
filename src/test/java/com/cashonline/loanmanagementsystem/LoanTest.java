@@ -1,7 +1,7 @@
 package com.cashonline.loanmanagementsystem;
 
-import com.cashonline.loanmanagementsystem.model.Loan;
-import com.cashonline.loanmanagementsystem.model.Person;
+import com.cashonline.loanmanagementsystem.model.entities.Loan;
+import com.cashonline.loanmanagementsystem.model.entities.Person;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -1,8 +1,10 @@
 package com.cashonline.loanmanagementsystem.model.service;
 
-import com.cashonline.loanmanagementsystem.model.Loan;
-import com.cashonline.loanmanagementsystem.model.Person;
+import com.cashonline.loanmanagementsystem.model.entities.Loan;
+import com.cashonline.loanmanagementsystem.model.entities.Person;
+import com.cashonline.loanmanagementsystem.model.requestmodel.Page;
 import com.cashonline.loanmanagementsystem.persistence.dao.*;
+import com.cashonline.loanmanagementsystem.model.responsemodel.PagedLoans;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -13,9 +15,6 @@ import java.util.Optional;
 
 @Service
 public class LoanServiceImpl implements LoanService {
-
-    public record PagedLoans(List<Loan> page, Integer totalPages){}
-    public record Page(Integer pageNumber, Integer pageSize) {}
 
     private final PersonDAO personDao;
     private final LoanDAO loanDao;
@@ -34,6 +33,6 @@ public class LoanServiceImpl implements LoanService {
     @Override
     public PagedLoans getLoans(Page page) {
 
-        return loanDao.getPagedLoans(page);
+        return loanDao.getLoansPaged(page);
     }
 }

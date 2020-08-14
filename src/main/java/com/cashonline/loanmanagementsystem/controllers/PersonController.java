@@ -1,6 +1,6 @@
 package com.cashonline.loanmanagementsystem.controllers;
 
-import com.cashonline.loanmanagementsystem.model.Person;
+import com.cashonline.loanmanagementsystem.model.entities.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

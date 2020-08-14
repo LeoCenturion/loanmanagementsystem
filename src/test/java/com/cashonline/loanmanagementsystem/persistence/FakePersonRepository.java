@@ -1,8 +1,9 @@
 package com.cashonline.loanmanagementsystem.persistence;
 
-import com.cashonline.loanmanagementsystem.model.Person;
-import com.cashonline.loanmanagementsystem.model.service.LoanServiceImpl;
+import com.cashonline.loanmanagementsystem.model.entities.Person;
+import com.cashonline.loanmanagementsystem.model.requestmodel.Page;
 import com.cashonline.loanmanagementsystem.persistence.dao.PersonDAO;
+import com.cashonline.loanmanagementsystem.model.responsemodel.PagedLoans;
 import com.jasongoodwin.monads.Try;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -45,7 +46,7 @@ public class FakePersonRepository implements PersonDAO {
     }
 
     @Override
-    public LoanServiceImpl.PagedLoans getLoansPaged(Long borrowerId, LoanServiceImpl.Page page) {
+    public PagedLoans getLoansPaged(Long borrowerId, Page page) {
         return null;
     }
 

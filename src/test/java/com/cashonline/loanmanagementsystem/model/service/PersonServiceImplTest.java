@@ -2,7 +2,7 @@ package com.cashonline.loanmanagementsystem.model.service;
 
 import com.cashonline.loanmanagementsystem.persistence.FakePersonRepository;
 import com.cashonline.loanmanagementsystem.persistence.dao.PersonDAO;
-import com.cashonline.loanmanagementsystem.model.Person;
+import com.cashonline.loanmanagementsystem.model.entities.Person;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

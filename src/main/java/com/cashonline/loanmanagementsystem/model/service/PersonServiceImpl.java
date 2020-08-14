@@ -1,7 +1,7 @@
 package com.cashonline.loanmanagementsystem.model.service;
 
 import com.cashonline.loanmanagementsystem.persistence.dao.PersonDAO;
-import com.cashonline.loanmanagementsystem.model.Person;
+import com.cashonline.loanmanagementsystem.model.entities.Person;
 import com.jasongoodwin.monads.Try;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

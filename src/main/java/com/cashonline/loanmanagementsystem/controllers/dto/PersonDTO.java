@@ -1,6 +1,6 @@
 package com.cashonline.loanmanagementsystem.controllers.dto;
 
-import com.cashonline.loanmanagementsystem.model.Person;
+import com.cashonline.loanmanagementsystem.model.entities.Person;
 
 public class PersonDTO {
 

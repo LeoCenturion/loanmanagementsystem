@@ -1,6 +1,6 @@
 package com.cashonline.loanmanagementsystem.model.service;
 
-import com.cashonline.loanmanagementsystem.model.Person;
+import com.cashonline.loanmanagementsystem.model.entities.Person;
 import com.jasongoodwin.monads.Try;
 
 import java.util.Optional;

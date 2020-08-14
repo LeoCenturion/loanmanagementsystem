@@ -1,9 +1,10 @@
 package com.cashonline.loanmanagementsystem.persistence.dao;
 
-import com.cashonline.loanmanagementsystem.model.service.LoanServiceImpl;
+import com.cashonline.loanmanagementsystem.model.requestmodel.Page;
+import com.cashonline.loanmanagementsystem.model.responsemodel.PagedLoans;
 
 public interface LoanDAO {
 
-    LoanServiceImpl.PagedLoans getPagedLoans(LoanServiceImpl.Page page);
+    PagedLoans getLoansPaged(Page page);
 
 }

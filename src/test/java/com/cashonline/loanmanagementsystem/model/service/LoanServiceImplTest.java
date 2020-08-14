@@ -1,6 +1,8 @@
 package com.cashonline.loanmanagementsystem.model.service;
 
-import com.cashonline.loanmanagementsystem.model.*;
+import com.cashonline.loanmanagementsystem.model.entities.Loan;
+import com.cashonline.loanmanagementsystem.model.entities.Person;
+import com.cashonline.loanmanagementsystem.model.requestmodel.Page;
 import com.cashonline.loanmanagementsystem.persistence.*;
 import com.cashonline.loanmanagementsystem.persistence.dao.*;
 
@@ -33,7 +35,7 @@ class LoanServiceImplTest {
 
     @Test
     public void whenLoanXExists_canGetX() {
-        LoanServiceImpl.Page page = new LoanServiceImpl.Page(1, 99);
+        Page page = new Page(1, 99);
         List<Long> ids = ls.getLoans(page).page().stream().map(Loan::getId).collect(toList());
         assertTrue(ids.contains(1L));
     }

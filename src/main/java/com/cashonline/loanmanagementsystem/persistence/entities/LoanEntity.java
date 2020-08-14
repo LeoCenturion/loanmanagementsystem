@@ -1,9 +1,7 @@
 package com.cashonline.loanmanagementsystem.persistence.entities;
 
 
-import com.cashonline.loanmanagementsystem.model.Loan;
-import com.cashonline.loanmanagementsystem.model.Person;
-import com.cashonline.loanmanagementsystem.persistence.dao.LoanDAOImpl;
+import com.cashonline.loanmanagementsystem.model.entities.Loan;
 
 import javax.persistence.*;
 
