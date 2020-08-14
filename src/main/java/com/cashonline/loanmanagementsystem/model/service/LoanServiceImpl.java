@@ -29,7 +29,7 @@ public class LoanServiceImpl implements LoanService {
         return person.map(Person::getLoans).orElse(new ArrayList<>());
     }
 
-    public List<Loan> getLoans() {
-        return loanDao.getLoans();
+    public List<Loan> getLoans(Page page) {
+        return loanDao.getLoans(page);
     }
 }

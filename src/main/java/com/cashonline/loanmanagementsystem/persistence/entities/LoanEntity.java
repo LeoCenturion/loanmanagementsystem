@@ -14,7 +14,8 @@ import javax.persistence.*;
         @NamedQuery(name = LoanEntity.COUNT_LOANS, query = "select COUNT(l) from LoanEntity l"),
 
 })
-@Table(name = "loans")
+@PersistenceContext(name = "myDatasource")
+@Table(name = "loans", schema = "MAIN")
 public class LoanEntity{
     private Long id;
     private Integer amount;

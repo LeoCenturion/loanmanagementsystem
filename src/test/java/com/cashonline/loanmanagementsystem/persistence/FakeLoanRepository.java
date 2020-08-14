@@ -1,10 +1,10 @@
 package com.cashonline.loanmanagementsystem.persistence;
 
 import com.cashonline.loanmanagementsystem.model.Loan;
-import com.cashonline.loanmanagementsystem.model.Person;
 import com.cashonline.loanmanagementsystem.persistence.dao.LoanDAO;
-import com.jasongoodwin.monads.Try;
+import com.cashonline.loanmanagementsystem.persistence.dao.Page;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -28,8 +28,9 @@ public class FakeLoanRepository implements LoanDAO {
     }
 
     @Override
-    public List<Loan> getLoans() {
+    public List<Loan> getLoans(Page page) {
         return new ArrayList<>(this.loans.values());
     }
+
 
 }

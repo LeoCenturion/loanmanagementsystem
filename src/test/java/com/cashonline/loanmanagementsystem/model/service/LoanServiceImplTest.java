@@ -33,7 +33,7 @@ class LoanServiceImplTest {
 
     @Test
     public void whenLoanXExists_canGetX() {
-        List<Long> ids = ls.getLoans().stream().map(Loan::getId).collect(toList());
+        List<Long> ids = ls.getLoans(new Page(1,99)).stream().map(Loan::getId).collect(toList());
         assertTrue(ids.contains(1L));
     }
 

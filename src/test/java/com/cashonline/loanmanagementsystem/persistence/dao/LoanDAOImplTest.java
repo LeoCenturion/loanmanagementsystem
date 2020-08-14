@@ -14,7 +14,7 @@ import org.springframework.test.context.TestPropertySource;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Query;
+
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
@@ -32,27 +32,33 @@ class LoanDAOImplTest {
     @Autowired
     EntityManagerFactory emf;
 
-    @BeforeEach
-    @Transactional
-    public void setup(){
-        EntityManager em = emf.createEntityManager();
-        EntityTransaction t = em.getTransaction();
-        t.begin();
-
-        LoanEntity le = new LoanEntity();
-        le.setAmount(1);
-        le.setBorrowerId((long) 1);
-        le.setId((long) 1);
-
-        em.persist(le);
-        em.flush();
-        t.commit();
-        em.close();
-
-    }
+//    @BeforeEach
+//    @Transactional
+//    public void setup(){
+//        EntityManager em = emf.createEntityManager();
+//        EntityTransaction t = em.getTransaction();
+//        t.begin();
+//
+//        LoanEntity le = new LoanEntity();
+//        le.setAmount(1);
+//        le.setBorrowerId((long) 1);
+//        le.setId((long) 1);
+//
+//        em.persist(le);
+//        em.flush();
+//        t.commit();
+//        em.close();
+//    }
     @Test
     public void whenLoansExists_thenCanGetAllLoans(){
-        List<Loan> loans = loanDAO.getLoans();
+        Page page = new Page(1, 99);
+        List<Loan> loans = loanDAO.getLoans(page);
+        assertFalse(loans.isEmpty());
+    }
+    @Test
+    public void canGetPagedData(){
+        Page page = new Page(1, 2);
+        List<Loan> loans = loanDAO.getLoans(page);
         assertFalse(loans.isEmpty());
     }
 
