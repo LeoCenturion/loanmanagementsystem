@@ -14,6 +14,9 @@ import java.util.Optional;
 @Service
 public class LoanServiceImpl implements LoanService {
 
+    public record PagedLoans(List<Loan> page, Integer totalPages){};
+    public record Page(Integer pageNumber, Integer pageSize) {}
+
     private final PersonDAO personDao;
 
     private final LoanDAO loanDao;
@@ -29,7 +32,9 @@ public class LoanServiceImpl implements LoanService {
         return person.map(Person::getLoans).orElse(new ArrayList<>());
     }
 
-    public List<Loan> getLoans(Page page) {
-        return loanDao.getLoans(page);
+    @Override
+    public PagedLoans getLoans(Page page) {
+
+        return loanDao.getPagedLoans(page);
     }
 }

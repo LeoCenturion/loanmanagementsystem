@@ -1,11 +1,10 @@
 package com.cashonline.loanmanagementsystem.persistence.dao;
 
-import com.cashonline.loanmanagementsystem.model.Loan;
-import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.util.List;
+import com.cashonline.loanmanagementsystem.model.service.LoanServiceImpl;
 
 public interface LoanDAO {
 
-    List<Loan> getLoans(Page page);
+    LoanServiceImpl.PagedLoans getPagedLoans(LoanServiceImpl.Page page);
+
+
 }
