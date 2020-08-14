@@ -3,19 +3,25 @@ package com.cashonline.loanmanagementsystem.model.service;
 import com.cashonline.loanmanagementsystem.model.Loan;
 import com.cashonline.loanmanagementsystem.model.Person;
 import com.cashonline.loanmanagementsystem.persistence.dao.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class LoanServiceImpl {
+@Service
+public class LoanServiceImpl implements LoanService {
 
     private final PersonDAO personDao;
+
     private final LoanDAO loanDao;
 
-    public LoanServiceImpl(PersonDAO personDao, LoanDAO loanDao) {
+    @Autowired
+    public LoanServiceImpl(PersonDAO personDao, @Qualifier("LoanRepository")  LoanDAO loan) {
         this.personDao = personDao;
-        this.loanDao = loanDao;
+        this.loanDao = loan;
     }
 
     public List<Loan> getLoanByPersonId(Long i) {

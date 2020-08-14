@@ -1,10 +1,9 @@
 package com.cashonline.loanmanagementsystem.controllers;
 
-import com.cashonline.loanmanagementsystem.persistence.dao.FakePersonRepository;
+import com.cashonline.loanmanagementsystem.model.service.PersonServiceImpl;
+import com.cashonline.loanmanagementsystem.persistence.FakePersonRepository;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.http.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,18 +11,15 @@ import static org.junit.jupiter.api.Assertions.*;
 import com.cashonline.loanmanagementsystem.controllers.dto.*;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest
 class PersonControllerTest {
 
-    @Autowired
     private PersonController pc;
     private PersonDTO p;
 
     @BeforeEach()
     public void setup(){
         p = new PersonDTO( 1, "email", "firstName", "lastName");
-//        PersonService ps = new PersonServiceImpl(new FakePersonRepository());
-//        pc = new PersonController(ps);
+        pc = new PersonController(new PersonServiceImpl(new FakePersonRepository()));
     }
 
     @Test

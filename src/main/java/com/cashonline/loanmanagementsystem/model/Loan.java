@@ -5,13 +5,16 @@ import java.util.Objects;
 final public class Loan {
     private final long id;
     private final int amount;
-    private final Person borrower;
+    private final Long borrowerId;
 
+    public Long getBorrowerId() {
+        return borrowerId;
+    }
 
-    public Loan(long i, int amount, Person p) {
+    public Loan(long i, int amount, Long p) {
         this.id = i;
         this.amount = amount;
-        this.borrower = p;
+        this.borrowerId = p;
     }
 
     @Override
@@ -31,7 +34,4 @@ final public class Loan {
         return id;
     }
 
-    public Person getBorrower() {
-        return borrower;
-    }
 }

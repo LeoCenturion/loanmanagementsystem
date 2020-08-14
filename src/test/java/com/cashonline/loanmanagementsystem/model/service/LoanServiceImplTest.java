@@ -21,11 +21,11 @@ class LoanServiceImplTest {
     void setUp() {
         PersonDAO personDAO = new FakePersonRepository();
         HashMap<Long, Loan> map = new HashMap<>();
-        map.put( 1L, new Loan(1, 1, p));
-        map.put( 2L, new Loan(2, 1, p));
+        map.put( 1L, new Loan(1, 1, p.getId()));
+        map.put( 2L, new Loan(2, 1, p.getId()));
         LoanDAO loanDAO = new FakeLoanRepository(map);
 
-        Person pWithLoans = p.addLoan(new Loan(1, 1, p)).addLoan(new Loan(2, 1, p));
+        Person pWithLoans = p.addLoan(new Loan(1, 1, p.getId())).addLoan(new Loan(2, 1, p.getId()));
         personDAO.savePerson(pWithLoans);
         ls = new LoanServiceImpl(personDAO, loanDAO);
         ps = new PersonServiceImpl(personDAO);
@@ -47,7 +47,7 @@ class LoanServiceImplTest {
 
     @Test
     public void whenLoanIsAddedToPerson_thenCanGetLoanByPersonId(){
-        Loan newLoan = new Loan(3L, 1, p);
+        Loan newLoan = new Loan(3L, 1, p.getId());
         Person pWithMoreLoans = p.addLoan(newLoan);
         ps.updatePerson(pWithMoreLoans);
 
@@ -55,6 +55,7 @@ class LoanServiceImplTest {
 
         assertTrue(loanIds.contains(newLoan.getId()));
     }
+
 
 
 

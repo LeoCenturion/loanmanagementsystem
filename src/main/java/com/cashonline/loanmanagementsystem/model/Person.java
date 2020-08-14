@@ -44,7 +44,7 @@ final public class Person {
     }
 
     public Person addLoan(Loan loan) {
-        if( !this.equals(loan.getBorrower())|| loans.contains(loan))
+        if( !(this.getId() == loan.getBorrowerId())|| loans.contains(loan))
             return this;
 
         List<Loan> newLoans = new ArrayList<>(loans);

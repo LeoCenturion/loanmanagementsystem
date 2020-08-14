@@ -37,24 +37,24 @@ public class PersonTest {
 
     @Test
     public void addLoanX_thenIsNotEmpty() {
-        Person pWithLoan = p.addLoan(new Loan(1, 0, p));
+        Person pWithLoan = p.addLoan(new Loan(1, 0, p.getId()));
         assertFalse(pWithLoan.getLoans().isEmpty());
     }
 
     @Test
     public void addLoanX_thenHasLoanX() {
-        Loan l1 = new Loan(1, 0, p);
+        Loan l1 = new Loan(1, 0, p.getId());
         Person pWithLoan = p.addLoan(l1);
         assertTrue(pWithLoan.getLoans().contains(l1));
 
-        Loan l2 = new Loan(2, 0, p);
+        Loan l2 = new Loan(2, 0, p.getId());
         Person pWithTwoLoans = pWithLoan.addLoan(l2);
         assertTrue(pWithTwoLoans.getLoans().contains(l2));
     }
 
     @Test
     public void addLoanXTwice_thenHasLoanXOnce() {
-        Loan l1 = new Loan(1, 0, p);
+        Loan l1 = new Loan(1, 0, p.getId());
         Person pWithLoan = p.addLoan(l1);
         assertTrue(pWithLoan.getLoans().contains(l1));
 
@@ -65,8 +65,8 @@ public class PersonTest {
 
     @Test
     public void removeLoanX_thenDoesntContainX() {
-        Loan l1 = new Loan(1, 0, p);
-        Loan l2 = new Loan(2, 0, p);
+        Loan l1 = new Loan(1, 0, p.getId());
+        Loan l2 = new Loan(2, 0, p.getId());
         Person pWithOneLoan = p.addLoan(l1).addLoan(l2).removeLoan(l1);
 
         assertFalse(pWithOneLoan.getLoans().contains(l1));
@@ -74,8 +74,8 @@ public class PersonTest {
 
     @Test
     public void removeLoanX_thenHasLessLoans() {
-        Loan l1 = new Loan(1, 0, p);
-        Loan l2 = new Loan(2, 0, p);
+        Loan l1 = new Loan(1, 0, p.getId());
+        Loan l2 = new Loan(2, 0, p.getId());
         Person pWithOneLoan = p.addLoan(l1).addLoan(l2).removeLoan(l1);
 
         assertEquals(1, pWithOneLoan.getLoans().size());
@@ -83,8 +83,8 @@ public class PersonTest {
 
     @Test
     public void addLoanBelongingToOther_thenDoesntAddLoan(){
-        Loan l1 = new Loan(1, 0, p);
-        Loan l2 = new Loan(2, 0, new Person((long) 2,"","",""));
+        Loan l1 = new Loan(1, 0, p.getId());
+        Loan l2 = new Loan(2, 0, 2L);
         Person pWithLoans = p.addLoan(l1).addLoan(l2);
 
         assertTrue(pWithLoans.getLoans().contains(l1));
