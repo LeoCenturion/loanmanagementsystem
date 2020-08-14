@@ -6,3 +6,10 @@ CREATE TABLE IF NOT EXISTS  MAIN.loans (
 	borrowerId int4 NOT NULL,
 	CONSTRAINT loans_pk PRIMARY KEY (id)
 );
+CREATE TABLE IF NOT EXISTS  MAIN.persons (
+	id int4 NOT NULL,
+	lastName varchar NOT NULL,
+	firstName varchar NOT NULL,
+	email varchar,
+	CONSTRAINT persons_pk PRIMARY KEY (id)
+);

@@ -18,12 +18,10 @@ import static java.util.stream.Collectors.toList;
 
 
 @Repository
-@Qualifier("LoanRepository")
-
+@Qualifier("LoanDAO")
 public class LoanDAOImpl implements LoanDAO {
 
     private final LoanRepository repository;
-
     @PersistenceContext
     EntityManager em;
 
@@ -44,7 +42,6 @@ public class LoanDAOImpl implements LoanDAO {
         return new LoanServiceImpl.PagedLoans(plh.getPageList(), pagedAnswer.getTotalPages());
 
     }
-
 
 
 

@@ -1,6 +1,7 @@
 package com.cashonline.loanmanagementsystem.persistence;
 
 import com.cashonline.loanmanagementsystem.model.Person;
+import com.cashonline.loanmanagementsystem.model.service.LoanServiceImpl;
 import com.cashonline.loanmanagementsystem.persistence.dao.PersonDAO;
 import com.jasongoodwin.monads.Try;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -41,6 +42,11 @@ public class FakePersonRepository implements PersonDAO {
     @Override
     public void updatePerson(Person p) {
         persons.put(p.getId(), p);
+    }
+
+    @Override
+    public LoanServiceImpl.PagedLoans getLoansPaged(Long borrowerId, LoanServiceImpl.Page page) {
+        return null;
     }
 
     private static class PersonAddedTwiceException extends RuntimeException {

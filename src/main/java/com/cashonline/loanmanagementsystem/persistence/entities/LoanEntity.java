@@ -11,19 +11,27 @@ import javax.persistence.*;
 @NamedQueries({
         @NamedQuery(name = LoanEntity.GET_LOAN_BY_ID, query = "select l from LoanEntity l where l.id = :id"),
         @NamedQuery(name = LoanEntity.GET_ALL_LOANS, query = "select l from LoanEntity l"),
-        @NamedQuery(name = LoanEntity.COUNT_LOANS, query = "select COUNT(l) from LoanEntity l"),
-
+//        @NamedQuery(name = LoanEntity.GET_LOANS_BY_BORROWER, query = """
+//                select l from LoanEntity l, PersonEntity p
+//                where l.borrowerId = p.id
+//                and p.id = :id
+//                """),
 })
 @PersistenceContext(name = "myDatasource")
 @Table(name = "loans", schema = "MAIN")
 public class LoanEntity{
     private Long id;
     private Integer amount;
-    private Long borrowerId;
 
-    static final String GET_LOAN_BY_ID = "getLoanById";
-    public static final String GET_ALL_LOANS = "getAllLoans";
-    static final String COUNT_LOANS = "countLoans";
+    @ManyToOne
+    @JoinColumn(name = "borrowerId")
+    private PersonEntity borrower;
+
+    private Long borrowerId;
+    public static final String GET_LOANS_BY_BORROWER = "LoanEntity.getAllLoansByBorrower";
+    static final String GET_LOAN_BY_ID = "LoanEntity.getLoanById";
+    public static final String GET_ALL_LOANS = "LoanEntity.getAllLoans";
+    static final String COUNT_LOANS = "LoanEntity.countLoans";
 
     public Integer getAmount() {
         return amount;

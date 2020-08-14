@@ -14,15 +14,14 @@ import java.util.Optional;
 @Service
 public class LoanServiceImpl implements LoanService {
 
-    public record PagedLoans(List<Loan> page, Integer totalPages){};
+    public record PagedLoans(List<Loan> page, Integer totalPages){}
     public record Page(Integer pageNumber, Integer pageSize) {}
 
     private final PersonDAO personDao;
-
     private final LoanDAO loanDao;
 
     @Autowired
-    public LoanServiceImpl(PersonDAO personDao, @Qualifier("LoanRepository")  LoanDAO loan) {
+    public LoanServiceImpl(@Qualifier("PersonDAO") PersonDAO personDao, @Qualifier("LoanDAO")  LoanDAO loan) {
         this.personDao = personDao;
         this.loanDao = loan;
     }

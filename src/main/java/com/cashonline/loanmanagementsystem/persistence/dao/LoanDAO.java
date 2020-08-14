@@ -6,5 +6,4 @@ public interface LoanDAO {
 
     LoanServiceImpl.PagedLoans getPagedLoans(LoanServiceImpl.Page page);
 
-
 }
