@@ -1,12 +1,9 @@
 package com.cashonline.loanmanagementsystem.persistence.entities;
 
-import com.cashonline.loanmanagementsystem.model.entities.Loan;
 import com.cashonline.loanmanagementsystem.model.entities.Person;
-
 import javax.persistence.*;
 import java.util.List;
 import java.util.stream.Stream;
-
 import static java.util.stream.Collectors.toList;
 
 @Entity
@@ -14,7 +11,6 @@ import static java.util.stream.Collectors.toList;
 @Table(name = "persons", schema = "MAIN")
 public class PersonEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
     @Column(name = "lastName")
@@ -29,12 +25,6 @@ public class PersonEntity {
 
     public PersonEntity(long id, String email, String firstName, String lastName, List<LoanEntity> loans) {
         this.id = id;
-        this.email = email;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.loans = loans;
-    }
-    public PersonEntity(String email, String firstName, String lastName, List<LoanEntity> loans) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -66,7 +56,7 @@ public class PersonEntity {
         List<LoanEntity> loans = p.getLoans().stream()
                 .map(LoanEntity::from)
                 .collect(toList());
-        return new PersonEntity(p.getEmail(), p.getFirstName(), p.getLastName(), loans);
+        return new PersonEntity(p.getId(), p.getEmail(), p.getFirstName(), p.getLastName(), loans);
     }
 
     public static Person toPerson(PersonEntity personEntity) {
