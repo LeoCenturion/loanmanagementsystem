@@ -5,6 +5,7 @@ import com.cashonline.loanmanagementsystem.persistence.entities.LoanEntity;
 
 
 import com.cashonline.loanmanagementsystem.model.responsemodel.PagedLoans;
+import com.jasongoodwin.monads.Try;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.support.PagedListHolder;
@@ -43,6 +44,10 @@ public class LoanDAOImpl implements LoanDAO {
 
     }
 
+    @Override
+    public Try saveLoan(LoanEntity loan) {
+        return null;
+    }
 
 
 }

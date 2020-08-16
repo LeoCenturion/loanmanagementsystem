@@ -1,6 +1,10 @@
 package configuration;
 
 
+import org.hibernate.boot.model.naming.ImplicitNamingStrategy;
+import org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl;
+import org.hibernate.boot.model.naming.PhysicalNamingStrategy;
+import org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -76,6 +80,16 @@ public class PersistenceConfig {
         hibernateProperties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("spring.jpa.hibernate.ddl-auto"));
         hibernateProperties.setProperty("hibernate.dialect", env.getProperty("spring.jooq.sql-dialect"));
         return hibernateProperties;
+    }
+
+    @Bean
+    public PhysicalNamingStrategy physical() {
+        return new PhysicalNamingStrategyStandardImpl();
+    }
+
+    @Bean
+    public ImplicitNamingStrategy implicit() {
+        return new ImplicitNamingStrategyLegacyJpaImpl();
     }
 
 }

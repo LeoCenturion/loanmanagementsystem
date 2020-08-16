@@ -5,6 +5,8 @@ import com.cashonline.loanmanagementsystem.model.entities.Person;
 import com.cashonline.loanmanagementsystem.model.requestmodel.Page;
 import com.cashonline.loanmanagementsystem.model.responsemodel.PagedLoans;
 import com.jasongoodwin.monads.Try;
+import com.jasongoodwin.monads.TrySupplier;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -23,28 +25,34 @@ import com.cashonline.loanmanagementsystem.persistence.entities.*;
 public class PersonDAOImpl implements PersonDAO {
 
     private final PersonRepository personRepository;
+    private final LoanDAO loanDAO;
 
     @PersistenceContext
     EntityManager em;
 
     @Autowired
-    public PersonDAOImpl(PersonRepository personRepository) {
+    public PersonDAOImpl(PersonRepository personRepository, @Qualifier("LoanDAO") LoanDAO loanDAO) {
         this.personRepository = personRepository;
+        this.loanDAO = loanDAO;
     }
 
     @Override
     public Optional<Person> findPerson(long id) {
-        throw new RuntimeException("not implemented");
+        return personRepository.findById(id).map(PersonEntity::toPerson);
     }
 
     @Override
-    public Try savePerson(Person p) {
-        throw new RuntimeException("not implemented");
+    public Try<Person> savePerson(Person p) {
+        PersonEntity personEntity = PersonEntity.from(p);
+        if(personEntity.getLoans().map(loanDAO::saveLoan).allMatch(Try::isSuccess))
+            return Try.ofFailable(() -> personRepository.save(personEntity)).map(PersonEntity::toPerson);
+        else
+            return Try.failure(new IllegalStateException());
     }
 
     @Override
     public void deletePerson(long l) {
-        throw new RuntimeException("not implemented");
+        this.personRepository.deleteById(l);
     }
 
     @Override
@@ -63,7 +71,7 @@ public class PersonDAOImpl implements PersonDAO {
 
 
 
-    @org.jetbrains.annotations.NotNull
+    @NotNull
     private static List<Loan> getLoansList(Page page, Optional<PersonEntity> pagedAnswer) {
         Integer skip = page.pageSize()* page.pageNumber();
         List<Loan> loans = pagedAnswer.stream()

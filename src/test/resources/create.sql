@@ -8,8 +8,8 @@ CREATE TABLE IF NOT EXISTS  MAIN.loans (
 );
 CREATE TABLE IF NOT EXISTS  MAIN.persons (
 	id int4 NOT NULL,
-	lastName varchar NOT NULL,
-	firstName varchar NOT NULL,
+	lastName varchar ,
+	firstName varchar ,
 	email varchar,
 	CONSTRAINT persons_pk PRIMARY KEY (id)
 );

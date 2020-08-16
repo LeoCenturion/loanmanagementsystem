@@ -4,6 +4,8 @@ import com.cashonline.loanmanagementsystem.model.entities.Loan;
 import com.cashonline.loanmanagementsystem.model.requestmodel.Page;
 import com.cashonline.loanmanagementsystem.persistence.dao.LoanDAO;
 import com.cashonline.loanmanagementsystem.model.responsemodel.PagedLoans;
+import com.cashonline.loanmanagementsystem.persistence.entities.LoanEntity;
+import com.jasongoodwin.monads.Try;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
@@ -17,10 +19,7 @@ public class FakeLoanRepository implements LoanDAO {
 
     private Map<Long, Loan> loans = new HashMap<>();
 
-
-    public FakeLoanRepository() {
-
-    }
+    public FakeLoanRepository() {}
 
     public FakeLoanRepository(HashMap<Long, Loan> map) {
         this.loans = map;
@@ -29,6 +28,11 @@ public class FakeLoanRepository implements LoanDAO {
     @Override
     public PagedLoans getLoansPaged(Page page) {
         return new PagedLoans(new ArrayList<>(this.loans.values()), 0);
+    }
+
+    @Override
+    public Try saveLoan(LoanEntity loan) {
+        return null;
     }
 
 

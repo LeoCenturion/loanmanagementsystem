@@ -11,6 +11,6 @@ INSERT INTO main.loans (id,amount,borrowerId)
 
 
 INSERT INTO main.persons (id,lastName,firstName, email)
-	VALUES (1,'argento','pepe','');
+	VALUES (1,'argento','pepe','a');
 INSERT INTO main.persons (id,lastName,firstName, email)
-	VALUES (2,'perez','juan','');
+	VALUES (2,'perez','juan','b');

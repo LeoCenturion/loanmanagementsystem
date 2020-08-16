@@ -34,4 +34,7 @@ final public class Loan {
         return id;
     }
 
+    public int getAmount() {
+        return amount;
+    }
 }

@@ -18,18 +18,26 @@ import javax.persistence.*;
 @PersistenceContext(name = "myDatasource")
 @Table(name = "loans", schema = "MAIN")
 public class LoanEntity{
-    private Long id;
-    private Integer amount;
-
-    @ManyToOne
-    @JoinColumn(name = "borrowerId")
-    private PersonEntity borrower;
-
-    private Long borrowerId;
     public static final String GET_LOANS_BY_BORROWER = "LoanEntity.getAllLoansByBorrower";
     static final String GET_LOAN_BY_ID = "LoanEntity.getLoanById";
     public static final String GET_ALL_LOANS = "LoanEntity.getAllLoans";
     static final String COUNT_LOANS = "LoanEntity.countLoans";
+
+    @Id
+    @Column(name = "id")
+    private Long id;
+    @Column(name = "amount")
+    private Integer amount;
+    @Column(name = "borrowerId")
+    private Long borrowerId;
+
+    public LoanEntity(long id, int amount, Long borrowerId) {
+        this.id = id;
+        this.amount = amount;
+        this.borrowerId = borrowerId;
+    }
+
+    public LoanEntity() { }
 
     public Integer getAmount() {
         return amount;
@@ -58,6 +66,10 @@ public class LoanEntity{
     }
 
     public static Loan toLoan(LoanEntity loanEntity) {
-        return new Loan(loanEntity.getId(), loanEntity.getAmount(), loanEntity.borrowerId);
+        return new Loan(loanEntity.getId(), loanEntity.getAmount(), loanEntity.getBorrowerId());
+    }
+
+    public static LoanEntity from(Loan loan) {
+        return new LoanEntity(loan.getId(), loan.getAmount(), loan.getBorrowerId());
     }
 }
