@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.logging.Logger;
 
 @Service
 public class PersonServiceImpl implements PersonService {
@@ -29,7 +28,6 @@ public class PersonServiceImpl implements PersonService {
         return personDAO.findPerson(person.getId())
                 .map(p -> Try.failure(new PersonInExistenceException()))
                 .orElseGet(() -> personDAO.savePerson(person));
-
     }
 
     public void removePerson(long l) {

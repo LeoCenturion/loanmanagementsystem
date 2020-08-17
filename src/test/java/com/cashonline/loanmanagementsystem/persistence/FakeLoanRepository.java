@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Repository
 @Qualifier("fakeLoanRepository")
@@ -33,6 +34,11 @@ public class FakeLoanRepository implements LoanDAO {
     @Override
     public Try saveLoan(LoanEntity loan) {
         return null;
+    }
+
+    @Override
+    public Optional<Loan> findLoan(long id) {
+        return Optional.empty();
     }
 
 

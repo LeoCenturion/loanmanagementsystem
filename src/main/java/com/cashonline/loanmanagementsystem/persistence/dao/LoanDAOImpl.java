@@ -15,6 +15,8 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.*;
 import java.util.List;
+import java.util.Optional;
+
 import static java.util.stream.Collectors.toList;
 
 
@@ -47,6 +49,11 @@ public class LoanDAOImpl implements LoanDAO {
     @Override
     public Try saveLoan(LoanEntity loan) {
         return null;
+    }
+
+    @Override
+    public Optional<Loan> findLoan(long id) {
+        return repository.findById(id).map(LoanEntity::toLoan);
     }
 
 
