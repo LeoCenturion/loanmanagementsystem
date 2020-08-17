@@ -1,28 +1,28 @@
 package com.cashonline.loanmanagementsystem.controllers;
 
 import com.cashonline.loanmanagementsystem.model.entities.Person;
-import com.cashonline.loanmanagementsystem.model.service.PersonServiceImpl;
-import com.cashonline.loanmanagementsystem.persistence.FakePersonRepository;
+import com.cashonline.loanmanagementsystem.controllers.dto.*;
+
+import configuration.PersistenceConfig;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.http.*;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-
-import com.cashonline.loanmanagementsystem.controllers.dto.*;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.PersistenceContext;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
+@TestPropertySource(locations = "classpath:application.properties")
+@ContextConfiguration(classes = {PersistenceConfig.class})
 @Transactional
 class PersonControllerTest {
 
@@ -57,41 +57,61 @@ class PersonControllerTest {
     }
 
     @Test
-    public void whenAddedPerson_thenCanGetPerson() {
-        PersonDTO p = new PersonDTO("email", "firstName", "lastName");
+    public void whenAddedPerson_thenGetStatusIsOK() {
+        PersonDTO p = new PersonDTO(9999L, "email", "firstName", "lastName");
         Person personAdded = pc.addPerson(p).getBody();
-        ResponseEntity<PersonDTO> expected = pc.getPerson(personAdded.getId());
-        assertEquals(HttpStatus.OK, expected.getStatusCode());
+        ResponseEntity<PersonDTO> actual = pc.getPerson(personAdded.getId());
+        assertEquals(HttpStatus.OK, actual.getStatusCode());
     }
 
     @Test
-    public void whenPersonDoesntExist_thenCannotGetPerson() {
+    public void whenPersonDoesntExist_thenGetStatusIsNotFound() {
         Long personId = 9999L;
-        ResponseEntity<PersonDTO> expected = pc.getPerson(personId);
-        assertEquals(HttpStatus.NOT_FOUND, expected.getStatusCode());
+        ResponseEntity<PersonDTO> actual = pc.getPerson(personId);
+        assertEquals(HttpStatus.NOT_FOUND, actual.getStatusCode());
 
     }
 
     @Test
     public void whenPersonExitsAndIsDeleted_thenStatusIsOk() {
         PersonDTO p = new PersonDTO(1, "email", "firstName", "lastName");
-        ResponseEntity expected = pc.deletePerson(p.getId());
-        assertEquals(HttpStatus.OK, expected.getStatusCode());
+        ResponseEntity actual = pc.deletePerson(p.getId());
+        assertEquals(HttpStatus.OK, actual.getStatusCode());
     }
 
     @Test
-    public void whenPersonExistsAndIsDelted_thenCannotGetId() {
+    public void whenPersonExistsAndIsDelted_thenGetStatusIsNotFound() {
         PersonDTO p = new PersonDTO(1, "email", "firstName", "lastName");
         pc.deletePerson(p.getId());
-        ResponseEntity expected = pc.getPerson(p.getId());
-        assertEquals(HttpStatus.NOT_FOUND, expected.getStatusCode());
+        ResponseEntity actual = pc.getPerson(p.getId());
+        assertEquals(HttpStatus.NOT_FOUND, actual.getStatusCode());
     }
 
     @Test
     public void whenPersonDoesntExistsAndIsDeleted_thenStatusIsOk() {
         PersonDTO p = new PersonDTO(99999, "email", "firstName", "lastName");
-        ResponseEntity expected = pc.deletePerson(p.getId());
-        assertEquals(HttpStatus.OK, expected.getStatusCode());
+        ResponseEntity actual = pc.deletePerson(p.getId());
+        assertEquals(HttpStatus.OK, actual.getStatusCode());
     }
+
+    @Test
+    public void afterGettingPerson_thenDataIsCorrect(){
+        List<LoanDTO> loans = List.of(
+                new LoanDTO(2, 1, 1L),
+                new LoanDTO(3, 1, 1L),
+                new LoanDTO(4, 1, 1L)
+        );
+        PersonDTO expected = new PersonDTO(1L, "a", "pepe", "argento", loans);
+
+        ResponseEntity<PersonDTO> response = pc.getPerson(expected.getId());
+        PersonDTO actual = response.getBody();
+
+        assertEquals(expected.getId(), actual.getId());
+        assertEquals(expected.getEmail(), actual.getEmail());
+        assertEquals(expected.getFirstName(), actual.getFirstName());
+        assertEquals(expected.getLastName(), actual.getLastName());
+        assertEquals(loans, actual.getLoans());
+    }
+
 
 }

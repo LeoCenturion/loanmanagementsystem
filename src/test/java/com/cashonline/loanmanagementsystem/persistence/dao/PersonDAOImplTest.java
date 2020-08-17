@@ -49,16 +49,32 @@ class PersonDAOImplTest {
 
         assertEquals(p.getId(), actual.get().getId());
     }
-
     @Test
-    public void afterAddingPerson_canDeletePerson() {
+    public void afterAddingPerson_canDeletePerson(){
         Person p = new Person(99L, "email", "fistName", "lastName");
         personDAO.savePerson(p);
 
         personDAO.deletePerson(p.getId());
-
         Optional<Person> actual = personDAO.findPerson(p.getId());
+
         assertTrue(actual.isEmpty());
+    }
+
+    @Test
+    public void afterGettingPerson_dataIsCorrect() {
+        Person expected = new Person(99L, "email", "fistName", "lastName")
+        .addLoan(new Loan(99, 1, 99L))
+        .addLoan(new Loan(98, 1, 99L))
+        .addLoan(new Loan(97, 1, 99L));
+        personDAO.savePerson(expected);
+
+
+        Person actual = personDAO.findPerson(expected.getId()).get();
+        assertEquals(expected.getId(), actual.getId());
+        assertEquals(expected.getEmail(), actual.getEmail());
+        assertEquals(expected.getFirstName(), actual.getFirstName());
+        assertEquals(expected.getLastName(), actual.getLastName());
+        assertEquals(expected.getLoans(), actual.getLoans());
 
     }
 

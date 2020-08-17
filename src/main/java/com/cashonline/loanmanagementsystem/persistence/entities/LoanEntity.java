@@ -31,6 +31,7 @@ public class LoanEntity{
     @Column(name = "borrowerId")
     private Long borrowerId;
 
+
     public LoanEntity(long id, int amount, Long borrowerId) {
         this.id = id;
         this.amount = amount;

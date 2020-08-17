@@ -48,7 +48,7 @@ public class LoanDAOImpl implements LoanDAO {
 
     @Override
     public Try saveLoan(LoanEntity loan) {
-        return null;
+        return Try.ofFailable(() -> repository.save(loan));
     }
 
     @Override

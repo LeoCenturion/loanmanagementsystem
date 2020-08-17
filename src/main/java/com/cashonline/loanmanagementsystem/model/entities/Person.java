@@ -11,12 +11,12 @@ final public class Person {
     private final List<Loan> loans;
     private final Long id;
 
-    public Person(Long id, String email, String firstName, String lastName) {
+    public Person(Long id, String email, String firstName, String lastName, List<Loan> loans) {
         this.id = id;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.loans = new ArrayList<>();
+        this.loans = loans;
     }
 
     private Person(Person p,  List<Loan> loans){
@@ -25,6 +25,14 @@ final public class Person {
         this.firstName = p.firstName;
         this.lastName = p.lastName;
         this.loans = List.copyOf(loans);
+    }
+
+    public Person(long id, String email, String firstName, String lastName) {
+        this.id = id;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.loans = new ArrayList<>();
     }
 
     public String getEmail() {

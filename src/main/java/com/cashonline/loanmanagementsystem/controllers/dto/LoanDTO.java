@@ -1,16 +1,18 @@
 package com.cashonline.loanmanagementsystem.controllers.dto;
 
 
+import com.cashonline.loanmanagementsystem.model.entities.Loan;
+
 public class LoanDTO {
 
     private final long id;
     private final int amount;
-    private final PersonDTO borrower;
+    private final long borrowerId;
 
-    public LoanDTO(long id, int amount, PersonDTO borrower) {
+    public LoanDTO(long id, int amount, long borrower) {
         this.id = id;
         this.amount = amount;
-        this.borrower = borrower;
+        this.borrowerId = borrower;
     }
     public long getId() {
         return id;
@@ -20,8 +22,11 @@ public class LoanDTO {
         return amount;
     }
 
-    public PersonDTO getBorrower() {
-        return borrower;
+    public long getBorrowerId() {
+        return borrowerId;
     }
 
+    static public LoanDTO from(Loan loan){
+        return new LoanDTO(loan.getId(), loan.getAmount(), loan.getBorrowerId());
+    }
 }
