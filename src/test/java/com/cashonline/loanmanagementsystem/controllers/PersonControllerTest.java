@@ -29,31 +29,6 @@ class PersonControllerTest {
     @Autowired
     private PersonController pc;
 
-    EntityManagerFactory emf;
-
-//    @BeforeEach()
-//    public void setup() {
-//        EntityManager em = emf.createEntityManager();
-//        EntityTransaction t = em.getTransaction();
-//        t.begin();
-//        em.createNativeQuery("DELETE FROM main.loans");
-//        em.createNativeQuery("DELETE FROM main.persons");
-//        em.createNativeQuery("""
-//                INSERT INTO main.loans (id,amount,borrowerId)
-//                	VALUES (1,1,2),
-//                	VALUES (2,1,1),
-//                	VALUES (3,1,1),
-//                	VALUES (4,1,1),
-//                	VALUES (5,1,2)
-//                	""").executeUpdate();
-//        em.createNativeQuery("""
-//                 INSERT INTO main.persons (id,lastName,firstName, email)
-//                	VALUES (1,'argento','pepe','a'),
-//                	VALUES (2,'perez','juan','b'),
-//                """).executeUpdate();
-//        t.commit();
-//        em.close();
-//    }
 
     @Test
     public void whenAddedPerson_thenStatusIsOk() {
