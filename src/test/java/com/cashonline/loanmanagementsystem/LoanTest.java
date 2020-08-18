@@ -13,7 +13,7 @@ class LoanTest {
 
     @BeforeEach
     public void setup(){
-        p = new Person(1L,"email", "firstName", "lastName");
+        p = new Person(1,"email", "firstName", "lastName");
     }
 
     @Test

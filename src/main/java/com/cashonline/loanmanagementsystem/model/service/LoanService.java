@@ -7,7 +7,7 @@ import com.cashonline.loanmanagementsystem.model.responsemodel.PagedLoans;
 import java.util.List;
 
 public interface LoanService {
-    List<Loan> getLoanByPersonId(Long i);
+    List<Loan> getLoanByPersonId(Integer i);
 
     PagedLoans getLoans(Page page);
 }

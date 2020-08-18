@@ -18,7 +18,7 @@ public class PersonServiceImplTest {
     @BeforeEach
     public void setup(){
         PersonDAO personDAO = new FakePersonRepository();
-        p = new Person((long) 1, "","","");
+        p = new Person( 1, "","","");
         personDAO.savePerson(p);
 
         ps = new PersonServiceImpl(personDAO);
@@ -32,7 +32,7 @@ public class PersonServiceImplTest {
 
     @Test
     public void whenAddedPersonX_thenCanGetPersonX(){
-        Person expectedPerson = new Person((long) 2,"","","");
+        Person expectedPerson = new Person( 2,"","","");
         ps.addPerson(expectedPerson);
         Person  actualPerson = ps.getPerson(2).get();
 
@@ -41,8 +41,8 @@ public class PersonServiceImplTest {
 
     @Test
     public void whenAddedPersonXTwice_thenSecondIsIgnored(){
-        Person firstPerson = new Person((long) 2,"","first","");
-        Person secondPerson = new Person((long) 2,"","second","");
+        Person firstPerson = new Person( 2,"","first","");
+        Person secondPerson = new Person( 2,"","second","");
         ps.addPerson(firstPerson);
         ps.addPerson(secondPerson);
 
@@ -68,7 +68,7 @@ public class PersonServiceImplTest {
 
     @Test
     public void whenPersonXUpdated_thenChangesAreReflected(){
-        Person p = new Person((long) 1, "updated","","");
+        Person p = new Person( 1, "updated","","");
         ps.updatePerson(p);
         Optional<Person> actual = ps.getPerson(1);
         assertEquals("updated", actual.get().getEmail());

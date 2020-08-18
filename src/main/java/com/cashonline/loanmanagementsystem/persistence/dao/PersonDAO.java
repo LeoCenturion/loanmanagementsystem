@@ -9,13 +9,13 @@ import java.util.Optional;
 
 public interface PersonDAO {
 
-    Optional<Person> findPerson(long id);
+    Optional<Person> findPerson(Integer id);
 
     Try savePerson(Person p);
 
-    void deletePerson(long l);
+    void deletePerson(Integer l);
 
     void updatePerson(Person p);
 
-    PagedLoans getLoansPaged(Long borrowerId, Page page);
+    PagedLoans getLoansPaged(Integer borrowerId, Page page);
 }

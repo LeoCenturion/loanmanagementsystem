@@ -3,15 +3,15 @@ package com.cashonline.loanmanagementsystem.model.entities;
 import java.util.Objects;
 
 final public class Loan {
-    private final long id;
+    private final Integer id;
     private final int amount;
-    private final Long borrowerId;
+    private final Integer borrowerId;
 
-    public Long getBorrowerId() {
+    public Integer getBorrowerId() {
         return borrowerId;
     }
 
-    public Loan(long i, int amount, Long p) {
+    public Loan(Integer i, int amount, Integer p) {
         this.id = i;
         this.amount = amount;
         this.borrowerId = p;
@@ -30,7 +30,7 @@ final public class Loan {
         return Objects.hash(id);
     }
 
-    public long getId() {
+    public Integer getId() {
         return id;
     }
 

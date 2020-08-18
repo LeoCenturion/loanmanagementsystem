@@ -2,6 +2,7 @@ package com.cashonline.loanmanagementsystem.persistence.entities;
 
 import com.cashonline.loanmanagementsystem.model.entities.Loan;
 import com.cashonline.loanmanagementsystem.model.entities.Person;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.stream.Stream;
@@ -13,7 +14,7 @@ import static java.util.stream.Collectors.toList;
 public class PersonEntity {
     @Id
     @Column(name = "id")
-    private Long id;
+    private Integer id;
     @Column(name = "lastName")
     private String lastName;
     @Column(name = "firstName")
@@ -21,11 +22,11 @@ public class PersonEntity {
     @Column(name = "email")
     private String email;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name="borrowerId")
     private List<LoanEntity> loans;
 
-    public PersonEntity(long id, String email, String firstName, String lastName, List<LoanEntity> loans) {
+    public PersonEntity(Integer id, String email, String firstName, String lastName, List<LoanEntity> loans) {
         this.id = id;
         this.email = email;
         this.firstName = firstName;
@@ -33,7 +34,7 @@ public class PersonEntity {
         this.loans = loans;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 

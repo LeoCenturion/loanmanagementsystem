@@ -5,7 +5,6 @@ import com.cashonline.loanmanagementsystem.model.entities.Person;
 import com.cashonline.loanmanagementsystem.model.requestmodel.Page;
 import com.cashonline.loanmanagementsystem.model.responsemodel.PagedLoans;
 import com.jasongoodwin.monads.Try;
-import com.jasongoodwin.monads.TrySupplier;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -37,7 +36,7 @@ public class PersonDAOImpl implements PersonDAO {
     }
 
     @Override
-    public Optional<Person> findPerson(long id) {
+    public Optional<Person> findPerson(Integer id) {
         return personRepository.findById(id).map(PersonEntity::toPerson);
     }
 
@@ -51,7 +50,7 @@ public class PersonDAOImpl implements PersonDAO {
     }
 
     @Override
-    public void deletePerson(long l) {
+    public void deletePerson(Integer l) {
         this.personRepository.deleteById(l);
     }
 
@@ -62,11 +61,11 @@ public class PersonDAOImpl implements PersonDAO {
 
     @Override
     @Transactional
-    public PagedLoans getLoansPaged(Long borrowerId, Page page) {
+    public PagedLoans getLoansPaged(Integer borrowerId, Page page) {
         Optional<PersonEntity> pagedAnswer = personRepository.findById(borrowerId);
         List<Loan> loans = getLoansList(page, pagedAnswer);
 
-        return new PagedLoans(loans, (int) getTotalPages(page, pagedAnswer));
+        return new PagedLoans(loans, (int) getTotalPages(page, pagedAnswer), page.pageNumber(), page.pageSize());
     }
 
 

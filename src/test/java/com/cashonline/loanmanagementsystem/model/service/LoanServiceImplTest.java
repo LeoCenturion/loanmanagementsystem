@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class LoanServiceImplTest {
     LoanServiceImpl ls;
     PersonService ps;
-    Person p = new Person((long) 1, "", "", "");
+    Person p = new Person(1, "", "", "");
 
     @BeforeEach
     void setUp() {
@@ -36,30 +36,26 @@ class LoanServiceImplTest {
     @Test
     public void whenLoanXExists_canGetX() {
         Page page = new Page(1, 99);
-        List<Long> ids = ls.getLoans(page).page().stream().map(Loan::getId).collect(toList());
-        assertTrue(ids.contains(1L));
+        List<Integer> ids = ls.getLoans(page).loanList().stream().map(Loan::getId).collect(toList());
+        assertTrue(ids.contains(1));
     }
 
     @Test
     public void whenLoanXExists_canGetXByPersonId() {
-        List<Loan> l = ls.getLoanByPersonId(1L);
-        List<Long> ids = l.stream().map(Loan::getId).collect(toList());
-        assertTrue(ids.contains(1L));
-        assertTrue(ids.contains(2L));
+        List<Loan> l = ls.getLoanByPersonId(1);
+        List<Integer> ids = l.stream().map(Loan::getId).collect(toList());
+        assertTrue(ids.contains(1));
+        assertTrue(ids.contains(2));
     }
 
     @Test
     public void whenLoanIsAddedToPerson_thenCanGetLoanByPersonId(){
-        Loan newLoan = new Loan(3L, 1, p.getId());
+        Loan newLoan = new Loan(3, 1, p.getId());
         Person pWithMoreLoans = p.addLoan(newLoan);
         ps.updatePerson(pWithMoreLoans);
 
-        List<Long> loanIds = ls.getLoanByPersonId(pWithMoreLoans.getId()).stream().map(Loan::getId).collect(toList());
+        List<Object> loanIds = ls.getLoanByPersonId(pWithMoreLoans.getId()).stream().map(Loan::getId).collect(toList());
 
         assertTrue(loanIds.contains(newLoan.getId()));
     }
-
-
-
-
 }

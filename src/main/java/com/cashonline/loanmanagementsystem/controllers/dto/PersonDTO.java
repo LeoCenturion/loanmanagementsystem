@@ -10,13 +10,13 @@ import static java.util.stream.Collectors.toList;
 
 public class PersonDTO {
 
-    private long id;
+    private Integer id;
     private final String email;
     private final String firstName;
     private final String lastName;
     private final List<LoanDTO> loans;
 
-    public PersonDTO(long id, String email, String firstName, String lastName) {
+    public PersonDTO(Integer id, String email, String firstName, String lastName) {
         this.id = id;
         this.email = email;
         this.firstName = firstName;
@@ -24,7 +24,7 @@ public class PersonDTO {
         this.loans = new ArrayList<>();
     }
 
-    public PersonDTO(long id, String email, String firstName, String lastName, List<LoanDTO> loans) {
+    public PersonDTO(Integer id, String email, String firstName, String lastName, List<LoanDTO> loans) {
         this.id = id;
         this.email = email;
         this.firstName = firstName;
@@ -42,7 +42,7 @@ public class PersonDTO {
         return new Person(p.getId(), p.getEmail(), p.getFirstName(), p.getLastName());
     }
 
-    public long getId() {
+    public Integer getId() {
         return id;
     }
 

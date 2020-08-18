@@ -6,11 +6,11 @@ import com.jasongoodwin.monads.Try;
 import java.util.Optional;
 
 public interface PersonService {
-     Optional<Person> getPerson(long i);
+     Optional<Person> getPerson(Integer i);
 
      Try<Person> addPerson(Person person);
 
-     void removePerson(long l);
+     void removePerson(Integer l);
 
      void updatePerson(Person p);
 }

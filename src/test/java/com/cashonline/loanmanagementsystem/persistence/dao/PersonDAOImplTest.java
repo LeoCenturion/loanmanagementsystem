@@ -18,7 +18,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-@TestPropertySource(locations = "classpath:application.properties")
+//@TestPropertySource(locations = "classpath:application.properties")
 @ContextConfiguration(classes = {PersistenceConfig.class})
 @Transactional
 class PersonDAOImplTest {
@@ -33,7 +33,7 @@ class PersonDAOImplTest {
 
     @Test
     public void whenPersonDoesntExist_canAddPerson() {
-        Person p = new Person(99L, "email", "fistName", "lastName");
+        Person p = new Person(99, "email", "fistName", "lastName");
 
         Try actual = personDAO.savePerson(p);
 
@@ -42,7 +42,7 @@ class PersonDAOImplTest {
 
     @Test
     public void afterAddingPerson_canGetPerson() {
-        Person p = new Person(99L, "email", "fistName", "lastName");
+        Person p = new Person(99, "email", "fistName", "lastName");
         personDAO.savePerson(p);
 
         Optional<Person> actual = personDAO.findPerson(p.getId());
@@ -51,7 +51,7 @@ class PersonDAOImplTest {
     }
     @Test
     public void afterAddingPerson_canDeletePerson(){
-        Person p = new Person(99L, "email", "fistName", "lastName");
+        Person p = new Person(99, "email", "fistName", "lastName");
         personDAO.savePerson(p);
 
         personDAO.deletePerson(p.getId());
@@ -62,10 +62,10 @@ class PersonDAOImplTest {
 
     @Test
     public void afterGettingPerson_dataIsCorrect() {
-        Person expected = new Person(99L, "email", "fistName", "lastName")
-        .addLoan(new Loan(99, 1, 99L))
-        .addLoan(new Loan(98, 1, 99L))
-        .addLoan(new Loan(97, 1, 99L));
+        Person expected = new Person(99, "email", "fistName", "lastName")
+        .addLoan(new Loan(99, 1, 99))
+        .addLoan(new Loan(98, 1, 99))
+        .addLoan(new Loan(97, 1, 99));
         personDAO.savePerson(expected);
 
 
@@ -80,7 +80,7 @@ class PersonDAOImplTest {
 
     @Test
     public void whenDeletingPerson_loansDeletedToo() {
-        long personWithLoansId = 1L;
+        Integer personWithLoansId = 1;
         Optional<Person> personWithLoans = personDAO.findPerson(personWithLoansId);
         assertFalse(personWithLoans.isEmpty());
         List<Loan> loans = personWithLoans.get().getLoans();
@@ -95,7 +95,7 @@ class PersonDAOImplTest {
 
     @Test
     public void afterAddingPerson_personHasNoLoans(){
-        Person p = new Person(99L, "email", "fistName", "lastName");
+        Person p = new Person(99, "email", "fistName", "lastName");
 
         Try<Person> actual = personDAO.savePerson(p);
 
@@ -105,7 +105,7 @@ class PersonDAOImplTest {
 
     @Test
     public void afterDeletingPerson_canAddPersonAgain(){
-        Person p = new Person(99L, "email", "fistName", "lastName");
+        Person p = new Person(99, "email", "fistName", "lastName");
         personDAO.savePerson(p);
         personDAO.deletePerson(p.getId());
         personDAO.savePerson(p);

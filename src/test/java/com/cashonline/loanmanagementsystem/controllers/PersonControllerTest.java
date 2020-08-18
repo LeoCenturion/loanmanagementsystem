@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-@TestPropertySource(locations = "classpath:application.properties")
+//@TestPropertySource(locations = "classpath:application.properties")
 @ContextConfiguration(classes = {PersistenceConfig.class})
 @Transactional
 class PersonControllerTest {
@@ -58,7 +58,7 @@ class PersonControllerTest {
 
     @Test
     public void whenAddedPerson_thenGetStatusIsOK() {
-        PersonDTO p = new PersonDTO(9999L, "email", "firstName", "lastName");
+        PersonDTO p = new PersonDTO(9999, "email", "firstName", "lastName");
         Person personAdded = pc.addPerson(p).getBody();
         ResponseEntity<PersonDTO> actual = pc.getPerson(personAdded.getId());
         assertEquals(HttpStatus.OK, actual.getStatusCode());
@@ -66,7 +66,7 @@ class PersonControllerTest {
 
     @Test
     public void whenPersonDoesntExist_thenGetStatusIsNotFound() {
-        Long personId = 9999L;
+        Integer personId = 9999;
         ResponseEntity<PersonDTO> actual = pc.getPerson(personId);
         assertEquals(HttpStatus.NOT_FOUND, actual.getStatusCode());
 
@@ -101,7 +101,7 @@ class PersonControllerTest {
                 new LoanDTO(3, 1, 1L),
                 new LoanDTO(4, 1, 1L)
         );
-        PersonDTO expected = new PersonDTO(1L, "a", "pepe", "argento", loans);
+        PersonDTO expected = new PersonDTO(1, "a", "pepe", "argento", loans);
 
         ResponseEntity<PersonDTO> response = pc.getPerson(expected.getId());
         PersonDTO actual = response.getBody();
@@ -110,7 +110,7 @@ class PersonControllerTest {
         assertEquals(expected.getEmail(), actual.getEmail());
         assertEquals(expected.getFirstName(), actual.getFirstName());
         assertEquals(expected.getLastName(), actual.getLastName());
-        assertEquals(loans, actual.getLoans());
+        assertEquals(actual.getLoans(), loans);
     }
 
 

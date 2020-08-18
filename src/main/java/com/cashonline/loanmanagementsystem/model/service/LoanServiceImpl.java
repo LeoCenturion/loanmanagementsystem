@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Qualifier("LoanService")
 public class LoanServiceImpl implements LoanService {
 
     private final PersonDAO personDao;
@@ -25,7 +26,7 @@ public class LoanServiceImpl implements LoanService {
         this.loanDao = loan;
     }
 
-    public List<Loan> getLoanByPersonId(Long i) {
+    public List<Loan> getLoanByPersonId(Integer i) {
         Optional<Person> person = personDao.findPerson(i);
         return person.map(Person::getLoans).orElse(new ArrayList<>());
     }

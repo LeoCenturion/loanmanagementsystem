@@ -36,13 +36,12 @@ public class LoanDAOImpl implements LoanDAO {
     @Override
     public PagedLoans getLoansPaged(com.cashonline.loanmanagementsystem.model.requestmodel.Page page) {
         Page<LoanEntity> pagedAnswer = repository.findAll(PageRequest.of(page.pageNumber(), page.pageSize()));
-
         List<Loan> loans = pagedAnswer.get().map(LoanEntity::toLoan).collect(toList());
         PagedListHolder<Loan> plh = new PagedListHolder<Loan>(loans);
         plh.setPageSize(page.pageSize());
         plh.setPage(page.pageNumber());
 
-        return new PagedLoans(plh.getPageList(), pagedAnswer.getTotalPages());
+        return new PagedLoans(plh.getPageList(), pagedAnswer.getTotalPages(), page.pageNumber(), page.pageSize());
 
     }
 
@@ -52,7 +51,7 @@ public class LoanDAOImpl implements LoanDAO {
     }
 
     @Override
-    public Optional<Loan> findLoan(long id) {
+    public Optional<Loan> findLoan(Integer id) {
         return repository.findById(id).map(LoanEntity::toLoan);
     }
 

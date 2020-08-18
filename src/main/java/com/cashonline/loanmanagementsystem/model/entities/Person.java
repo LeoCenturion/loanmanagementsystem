@@ -9,9 +9,9 @@ final public class Person {
     private final String email;
     private final String firstName;
     private final List<Loan> loans;
-    private final Long id;
+    private final Integer id;
 
-    public Person(Long id, String email, String firstName, String lastName, List<Loan> loans) {
+    public Person(Integer id, String email, String firstName, String lastName, List<Loan> loans) {
         this.id = id;
         this.email = email;
         this.firstName = firstName;
@@ -27,7 +27,7 @@ final public class Person {
         this.loans = List.copyOf(loans);
     }
 
-    public Person(long id, String email, String firstName, String lastName) {
+    public Person(Integer id, String email, String firstName, String lastName) {
         this.id = id;
         this.email = email;
         this.firstName = firstName;
@@ -89,7 +89,7 @@ final public class Person {
         return new Person(this, newLoans);
     }
 
-    public long getId() {
+    public Integer getId() {
         return id;
     }
 }

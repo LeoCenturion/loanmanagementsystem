@@ -28,7 +28,7 @@ public class FakeLoanRepository implements LoanDAO {
 
     @Override
     public PagedLoans getLoansPaged(Page page) {
-        return new PagedLoans(new ArrayList<>(this.loans.values()), 0);
+        return new PagedLoans(new ArrayList<>(this.loans.values()), 0, page.pageNumber(), page.pageSize());
     }
 
     @Override
@@ -37,7 +37,7 @@ public class FakeLoanRepository implements LoanDAO {
     }
 
     @Override
-    public Optional<Loan> findLoan(long id) {
+    public Optional<Loan> findLoan(Integer id) {
         return Optional.empty();
     }
 

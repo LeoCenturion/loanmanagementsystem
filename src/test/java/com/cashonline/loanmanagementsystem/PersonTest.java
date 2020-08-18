@@ -12,7 +12,7 @@ public class PersonTest {
 
     @BeforeEach
     public void setup() {
-        p = new Person((long) 1, "email", "firstName", "lastName");
+        p = new Person( 1, "email", "firstName", "lastName");
 
     }
     @Test
@@ -84,7 +84,7 @@ public class PersonTest {
     @Test
     public void addLoanBelongingToOther_thenDoesntAddLoan(){
         Loan l1 = new Loan(1, 0, p.getId());
-        Loan l2 = new Loan(2, 0, 2L);
+        Loan l2 = new Loan(2, 0, 2);
         Person pWithLoans = p.addLoan(l1).addLoan(l2);
 
         assertTrue(pWithLoans.getLoans().contains(l1));

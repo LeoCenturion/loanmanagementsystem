@@ -15,14 +15,14 @@ import java.util.Optional;
 @Repository
 @Qualifier("fakePersonDAO")
 public class FakePersonRepository implements PersonDAO {
-    private final Map<Long, Person> persons;
+    private final Map<Integer, Person> persons;
 
     public FakePersonRepository() {
         this.persons = new HashMap<>();
     }
 
     @Override
-    public Optional<Person> findPerson(long i) {
+    public Optional<Person> findPerson(Integer i) {
         return Optional.ofNullable(this.persons.get(i));
     }
 
@@ -36,7 +36,7 @@ public class FakePersonRepository implements PersonDAO {
     }
 
     @Override
-    public void deletePerson(long l) {
+    public void deletePerson(Integer l) {
         persons.remove(l);
     }
 
@@ -46,7 +46,7 @@ public class FakePersonRepository implements PersonDAO {
     }
 
     @Override
-    public PagedLoans getLoansPaged(Long borrowerId, Page page) {
+    public PagedLoans getLoansPaged(Integer borrowerId, Page page) {
         return null;
     }
 

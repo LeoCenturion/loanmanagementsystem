@@ -25,14 +25,14 @@ public class LoanEntity{
 
     @Id
     @Column(name = "id")
-    private Long id;
+    private Integer id;
     @Column(name = "amount")
     private Integer amount;
     @Column(name = "borrowerId")
-    private Long borrowerId;
+    private Integer borrowerId;
 
 
-    public LoanEntity(long id, int amount, Long borrowerId) {
+    public LoanEntity(Integer id, int amount, Integer borrowerId) {
         this.id = id;
         this.amount = amount;
         this.borrowerId = borrowerId;
@@ -48,21 +48,21 @@ public class LoanEntity{
         this.amount = amount;
     }
 
-    public Long getBorrowerId() {
+    public Integer getBorrowerId() {
         return borrowerId;
     }
 
-    public void setBorrowerId(Long borrowerId) {
+    public void setBorrowerId(Integer borrowerId) {
         this.borrowerId = borrowerId;
     }
 
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
     @Id
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 

@@ -26,15 +26,15 @@ public class PersonController {
                 .recover(e -> ResponseEntity.status(HttpStatus.CONFLICT).build());
 
     }
-
-    public ResponseEntity<PersonDTO> getPerson(long id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<PersonDTO> getPerson(@PathVariable("id") Integer id) {
         return personService.getPerson(id)
                 .map(PersonDTO::fromPerson)
                 .map(p -> ResponseEntity.ok().body(p))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    public ResponseEntity deletePerson(long id) {
+    public ResponseEntity deletePerson(Integer id) {
         personService.removePerson(id);
         return ResponseEntity.ok().build();
     }

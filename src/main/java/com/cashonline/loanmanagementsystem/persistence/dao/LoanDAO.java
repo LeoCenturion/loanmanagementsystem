@@ -14,5 +14,5 @@ public interface LoanDAO {
 
     Try saveLoan(LoanEntity loan);
 
-    Optional<Loan> findLoan(long id);
+    Optional<Loan> findLoan(Integer id);
 }

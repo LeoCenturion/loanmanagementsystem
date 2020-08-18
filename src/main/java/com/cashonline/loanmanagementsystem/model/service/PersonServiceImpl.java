@@ -20,7 +20,7 @@ public class PersonServiceImpl implements PersonService {
         this.personDAO = personDAO;
     }
 
-    public Optional<Person> getPerson(long i) {
+    public Optional<Person> getPerson(Integer i) {
         return personDAO.findPerson(i);
     }
 
@@ -30,7 +30,7 @@ public class PersonServiceImpl implements PersonService {
                 .orElseGet(() -> personDAO.savePerson(person));
     }
 
-    public void removePerson(long l) {
+    public void removePerson(Integer l) {
         try {
             personDAO.deletePerson(l);
         }
