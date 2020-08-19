@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
+@Qualifier("PersonService")
 public class PersonServiceImpl implements PersonService {
 
     private final PersonDAO personDAO;

@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import com.cashonline.loanmanagementsystem.controllers.dto.PersonDTO;
 import com.cashonline.loanmanagementsystem.model.service.PersonService;
 
-@RequestMapping("api/v1/persons")
 @RestController
+@RequestMapping("users")
 public class PersonController {
     private final PersonService personService;
 
