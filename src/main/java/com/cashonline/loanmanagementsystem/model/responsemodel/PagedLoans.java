@@ -1,55 +1,83 @@
 package com.cashonline.loanmanagementsystem.model.responsemodel;
 
 import com.cashonline.loanmanagementsystem.model.entities.Loan;
+
 import java.util.List;
 
-public class PagedLoans{
+public class PagedLoans {
+    private List<Loan> items;
+
+    public Paging getPage() {
+        return page;
+    }
+
+    private Paging page;
+
+    public PagedLoans(List<Loan> items, Integer totalPages, Integer pageNumber, Integer pageSize) {
+        this.items = items;
+        this.page = new Paging(totalPages, pageNumber, pageSize);
+    }
+
+    public List<Loan> getItems() {
+        return items;
+    }
+
+    public Integer getTotalPages() {
+        return page.getTotalPages();
+    }
+
+    public Integer getPageNumber() {
+        return page.getPageNumber();
+    }
+
+    public Integer getPageSize() {
+        return page.getPageSize();
+    }
+
+    public void setItems(List<Loan> items) {
+        this.items = items;
+    }
+
+    public void setPage(Paging page) {
+        this.page = page;
+    }
 
     private static class Paging {
-        public Integer totalPages() {
+        public Paging() {  }
+
+        public Integer getTotalPages() {
             return totalPages;
         }
 
-        public Integer pageNumber() {
+        public Integer getPageNumber() {
             return pageNumber;
         }
 
-        public Integer pageSize() {
+        public Integer getPageSize() {
             return pageSize;
         }
 
-        private final Integer totalPages;
-        private final Integer pageNumber;
-        private final Integer pageSize;
+        private Integer totalPages;
+        private Integer pageNumber;
+        private Integer pageSize;
 
         Paging(Integer totalPages, Integer pageNumber, Integer pageSize) {
             this.totalPages = totalPages;
             this.pageNumber = pageNumber;
             this.pageSize = pageSize;
         }
-    }
-    private final List<Loan> loanList;
-    private final Paging paging;
 
-    public PagedLoans(List<Loan> loanList, Integer totalPages, Integer pageNumber, Integer pageSize) {
+        public void setTotalPages(Integer totalPages) {
+            this.totalPages = totalPages;
+        }
 
-        this.loanList = loanList;
-        this.paging = new Paging(totalPages, pageNumber, pageSize);
-    }
+        public void setPageNumber(Integer pageNumber) {
+            this.pageNumber = pageNumber;
+        }
 
-    public List<Loan> loanList() {
-        return loanList;
-    }
-
-    public Integer totalPages() {
-        return paging.totalPages();
+        public void setPageSize(Integer pageSize) {
+            this.pageSize = pageSize;
+        }
     }
 
-    public Integer pageNumber() {
-        return paging.pageNumber();
-    }
-
-    public Integer pageSize() {
-        return paging.pageSize();
-    }
 }

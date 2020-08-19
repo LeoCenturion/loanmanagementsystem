@@ -27,7 +27,8 @@ import java.util.Properties;
 @EnableTransactionManagement
 @PropertySource({ "classpath:application.properties" })
 @ComponentScan({ "com.cashonline.loanmanagementsystem" })
-@EnableJpaRepositories({"com.cashonline.loanmanagementsystem.persistence.dao"})
+@EnableJpaRepositories({"com.cashonline.loanmanagementsystem.persistence.dao",
+        "com.cashonline.loanmanagementsystem.infrastructure.repository"})
 public class PersistenceConfig {
 
     @Autowired

@@ -1,9 +1,7 @@
 package com.cashonline.loanmanagementsystem.controllers;
 
-import com.cashonline.loanmanagementsystem.controllers.dto.LoanDTO;
 import com.cashonline.loanmanagementsystem.model.requestmodel.Page;
 import com.cashonline.loanmanagementsystem.model.responsemodel.PagedLoans;
-import com.cashonline.loanmanagementsystem.model.service.LoanService;
 
 import configuration.PersistenceConfig;
 import org.junit.jupiter.api.Test;
@@ -33,7 +31,7 @@ public class LoanControllerTest {
     public void whenGettingAllLoans_statusIsOk(){
         Page page = new Page(0, 99);
 
-        ResponseEntity<PagedLoans> loans = loanController.getLoans(page);
+        ResponseEntity<PagedLoans> loans = loanController.getLoans(page.getPageNumber(), page.getPageSize());
 
         assertEquals(HttpStatus.OK, loans.getStatusCode());
     }
@@ -42,12 +40,12 @@ public class LoanControllerTest {
     public void whenGettingAllLoans_pagingDataIsWellFormatted(){
         Page page = new Page(0, 99);
 
-        PagedLoans loans = loanController.getLoans(page).getBody();
+        PagedLoans loans = loanController.getLoans(page.getPageNumber(), page.getPageSize()).getBody();
 
-        assertEquals(page.pageNumber(), loans.pageNumber());
-        assertEquals(page.pageSize(), loans.pageSize());
-        assertNotNull(loans.totalPages());
-        assertTrue(loans.totalPages() > 0);
+        assertEquals(page.pageNumber(), loans.getPageNumber());
+        assertEquals(page.pageSize(), loans.getPageSize());
+        assertNotNull(loans.getTotalPages());
+        assertTrue(loans.getTotalPages() > 0);
     }
 
 

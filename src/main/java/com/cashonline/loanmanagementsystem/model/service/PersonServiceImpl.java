@@ -26,9 +26,7 @@ public class PersonServiceImpl implements PersonService {
     }
 
     public Try addPerson(Person person) {
-        return personDAO.findPerson(person.getId())
-                .map(p -> Try.failure(new PersonInExistenceException()))
-                .orElseGet(() -> personDAO.savePerson(person));
+        return  personDAO.savePerson(person);
     }
 
     public void removePerson(Integer l) {

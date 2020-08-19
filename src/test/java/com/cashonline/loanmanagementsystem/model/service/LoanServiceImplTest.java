@@ -36,7 +36,7 @@ class LoanServiceImplTest {
     @Test
     public void whenLoanXExists_canGetX() {
         Page page = new Page(1, 99);
-        List<Integer> ids = ls.getLoans(page).loanList().stream().map(Loan::getId).collect(toList());
+        List<Integer> ids = ls.getLoans(page).getItems().stream().map(Loan::getId).collect(toList());
         assertTrue(ids.contains(1));
     }
 

@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import com.cashonline.loanmanagementsystem.controllers.dto.PersonDTO;
 import com.cashonline.loanmanagementsystem.model.service.PersonService;
 
+import javax.websocket.server.PathParam;
+
 @RestController
 @RequestMapping("users")
 public class PersonController {
@@ -21,7 +23,7 @@ public class PersonController {
 
     @PostMapping
     public ResponseEntity<PersonDTO> addPerson(@RequestBody PersonDTO person) {
-        return personService.addPerson(PersonDTO.toPerson(person))
+            return personService.addPerson(PersonDTO.toPerson(person))
                 .map(p -> ResponseEntity.ok().body(PersonDTO.fromPerson(p)))
                 .recover(e -> ResponseEntity.status(HttpStatus.CONFLICT).build());
 
@@ -33,8 +35,8 @@ public class PersonController {
                 .map(p -> ResponseEntity.ok().body(p))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
-
-    public ResponseEntity deletePerson(Integer id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity deletePerson(@PathParam("id") Integer id) {
         personService.removePerson(id);
         return ResponseEntity.ok().build();
     }

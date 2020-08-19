@@ -14,11 +14,11 @@ import static java.util.stream.Collectors.toList;
 public class PersonEntity {
     @Id
     @Column(name = "id")
-//    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    @Column(name = "lastName")
+    @Column(name = "last_name")
     private String lastName;
-    @Column(name = "firstName")
+    @Column(name = "first_name")
     private String firstName;
     @Column(name = "email")
     private String email;

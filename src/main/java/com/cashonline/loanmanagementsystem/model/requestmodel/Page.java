@@ -33,4 +33,11 @@ public class Page{
         this.pageSize = pageSize;
     }
 
+    public Integer getPageNumber() {
+        return pageNumber;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
 }

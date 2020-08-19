@@ -8,7 +8,7 @@ import javax.persistence.*;
 public class Registration {
     @Id
     private String user;
-    private String password;
+private String password;
     private Integer personId;
 
 
