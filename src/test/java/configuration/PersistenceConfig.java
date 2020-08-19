@@ -26,8 +26,9 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @PropertySource("classpath:application.properties")
-@ComponentScan({ "com.cashonline.loanmanagementsystem" })
-@EnableJpaRepositories("com.cashonline.loanmanagementsystem.persistence.dao")
+@ComponentScan({ "com.cashonline.loanmanagementsystem"})
+@EnableJpaRepositories({"com.cashonline.loanmanagementsystem.persistence.dao",
+        "com.cashonline.loanmanagementsystem.infrastructure.repository"})
 public class PersistenceConfig {
 
     @Autowired
@@ -41,7 +42,8 @@ public class PersistenceConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         final LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource());
-        em.setPackagesToScan("com.cashonline.loanmanagementsystem.persistence.entities");
+        em.setPackagesToScan("com.cashonline.loanmanagementsystem.persistence.entities",
+                "com.cashonline.loanmanagementsystem.infrastructure.repository");
 
         final HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);

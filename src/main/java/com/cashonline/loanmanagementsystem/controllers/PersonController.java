@@ -20,9 +20,9 @@ public class PersonController {
     }
 
     @PostMapping
-    public ResponseEntity<Person> addPerson(@RequestBody PersonDTO person) {
+    public ResponseEntity<PersonDTO> addPerson(@RequestBody PersonDTO person) {
         return personService.addPerson(PersonDTO.toPerson(person))
-                .map(p -> ResponseEntity.ok().body(p))
+                .map(p -> ResponseEntity.ok().body(PersonDTO.fromPerson(p)))
                 .recover(e -> ResponseEntity.status(HttpStatus.CONFLICT).build());
 
     }

@@ -10,11 +10,31 @@ import static java.util.stream.Collectors.toList;
 
 public class PersonDTO {
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setLoans(List<LoanDTO> loans) {
+        this.loans = loans;
+    }
+
     private Integer id;
-    private final String email;
-    private final String firstName;
-    private final String lastName;
-    private final List<LoanDTO> loans;
+    private  String email;
+    private  String firstName;
+    private  String lastName;
+    private  List<LoanDTO> loans;
 
     public PersonDTO(Integer id, String email, String firstName, String lastName) {
         this.id = id;
@@ -30,6 +50,9 @@ public class PersonDTO {
         this.firstName = firstName;
         this.lastName = lastName;
         this.loans = loans;
+    }
+
+    public PersonDTO() {
     }
 
 

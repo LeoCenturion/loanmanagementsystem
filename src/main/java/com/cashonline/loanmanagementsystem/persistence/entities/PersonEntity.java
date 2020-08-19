@@ -14,6 +14,7 @@ import static java.util.stream.Collectors.toList;
 public class PersonEntity {
     @Id
     @Column(name = "id")
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     @Column(name = "lastName")
     private String lastName;

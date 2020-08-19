@@ -4,6 +4,7 @@ import com.cashonline.loanmanagementsystem.infrastructure.repository.JwtService;
 import com.cashonline.loanmanagementsystem.infrastructure.repository.Registration;
 import com.cashonline.loanmanagementsystem.infrastructure.repository.RegistrationDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -19,6 +20,7 @@ import java.util.Optional;
 public class AuthenticationController {
 
     @Autowired
+    @Qualifier("RegistrationDAO")
     RegistrationDAO registrationDAO;
 
     @Autowired

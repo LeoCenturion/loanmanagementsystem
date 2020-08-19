@@ -59,7 +59,7 @@ class PersonControllerTest {
     @Test
     public void whenAddedPerson_thenGetStatusIsOK() {
         PersonDTO p = new PersonDTO(9999, "email", "firstName", "lastName");
-        Person personAdded = pc.addPerson(p).getBody();
+        PersonDTO personAdded = pc.addPerson(p).getBody();
         ResponseEntity<PersonDTO> actual = pc.getPerson(personAdded.getId());
         assertEquals(HttpStatus.OK, actual.getStatusCode());
     }
