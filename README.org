@@ -6,6 +6,7 @@ Simple loan management system
     2. maven
     3. docker
     4. make (opcional)
+
 * Instrucciones:
     1. Para generar el .jar de la aplicacion:
 
