@@ -1,4 +1,7 @@
+
 CREATE SCHEMA IF NOT EXISTS MAIN;
+CREATE SEQUENCE MAIN.HIBERNATE_SEQUENCE START WITH 1 INCREMENT BY 1;
+
 CREATE TABLE IF NOT EXISTS MAIN.loans
 (
     id         int4 NOT NULL,
@@ -8,18 +11,17 @@ CREATE TABLE IF NOT EXISTS MAIN.loans
 );
 CREATE TABLE IF NOT EXISTS MAIN.persons
 (
-    id        int4 NOT NULL,
-    lastName  varchar,
-    firstName varchar,
+    id        int4 NOT NULL auto_increment,
+    last_name  varchar,
+    first_name varchar,
     email     varchar,
     CONSTRAINT persons_pk PRIMARY KEY (id)
 );
 CREATE TABLE main.registrations
 (
-    personid       integer NULL,
+    personId       integer NULL,
     "user"         varchar NULL,
     "password"     varchar NULL,
-    registrationid integer NULL,
-    CONSTRAINT registrations_pk PRIMARY KEY (registrationid),
-    CONSTRAINT registrations_fk FOREIGN KEY (personid) REFERENCES main.persons (id)
+    CONSTRAINT registrations_pk PRIMARY KEY ("user"),
+    CONSTRAINT registrations_fk FOREIGN KEY (personId) REFERENCES main.persons (id)
 );
