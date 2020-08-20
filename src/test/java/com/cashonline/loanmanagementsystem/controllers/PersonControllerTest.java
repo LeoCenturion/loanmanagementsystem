@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-//@TestPropertySource(locations = "classpath:application.properties")
+@TestPropertySource(locations = "classpath:application.properties")
 @ContextConfiguration(classes = {PersistenceConfig.class})
 @Transactional
 class PersonControllerTest {
@@ -39,26 +39,26 @@ class PersonControllerTest {
     }
 
     @Test
-    public void whenPersonAddedTwice_thenStatusIsConflict() {
+    public void whenPersonAddedTwice_thenStatusIsOK() {
         PersonDTO p = new PersonDTO(92, "email", "firstName", "lastName");
         pc.addPerson(p);
         ResponseEntity<?> result = pc.addPerson(p);
-        assertEquals(HttpStatus.CONFLICT, result.getStatusCode());
+        assertEquals(HttpStatus.OK, result.getStatusCode());
     }
 
     @Test
     public void whenPersonAddedTwice_onlyFirstOneRemains() {
-        PersonDTO p = new PersonDTO(93, "email", "firstName", "lastName");
-        pc.addPerson(p);
-        PersonDTO other = new PersonDTO(p.getId(), "changed", "a", "a");
-        pc.addPerson(other);
-        ResponseEntity<PersonDTO> result = pc.getPerson(p.getId());
+        PersonDTO p = new PersonDTO( "email", "firstName", "lastName");
+        ResponseEntity<PersonDTO> firstPersonAdded = pc.addPerson(p);
+        PersonDTO other = new PersonDTO("changed", "a", "a");
+        ResponseEntity<PersonDTO> secondPersonAdded =pc.addPerson(other);
+        ResponseEntity<PersonDTO> result = pc.getPerson(firstPersonAdded.getBody().getId());
         assertEquals(p.getEmail(), result.getBody().getEmail());
     }
 
     @Test
     public void whenAddedPerson_thenGetStatusIsOK() {
-        PersonDTO p = new PersonDTO(9999, "email", "firstName", "lastName");
+        PersonDTO p = new PersonDTO( "email", "firstName", "lastName");
         PersonDTO personAdded = pc.addPerson(p).getBody();
         ResponseEntity<PersonDTO> actual = pc.getPerson(personAdded.getId());
         assertEquals(HttpStatus.OK, actual.getStatusCode());

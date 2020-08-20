@@ -43,30 +43,30 @@ class PersonDAOImplTest {
     @Test
     public void afterAddingPerson_canGetPerson() {
         Person p = new Person(99, "email", "fistName", "lastName");
-        personDAO.savePerson(p);
+        Try<Person> personSaved = personDAO.savePerson(p);
 
-        Optional<Person> actual = personDAO.findPerson(p.getId());
+        Optional<Person> actual = personDAO.findPerson(personSaved.getUnchecked().getId());
 
-        assertEquals(p.getId(), actual.get().getId());
+        assertEquals(p.getFirstName(), actual.get().getFirstName());
     }
     @Test
     public void afterAddingPerson_canDeletePerson(){
         Person p = new Person(99, "email", "fistName", "lastName");
-        personDAO.savePerson(p);
+        Person personSaved = (Person) personDAO.savePerson(p).getUnchecked();
 
-        personDAO.deletePerson(p.getId());
-        Optional<Person> actual = personDAO.findPerson(p.getId());
+        personDAO.deletePerson(personSaved.getId());
+        Optional<Person> actual = personDAO.findPerson(personSaved.getId());
 
         assertTrue(actual.isEmpty());
     }
 
     @Test
     public void afterGettingPerson_dataIsCorrect() {
-        Person expected = new Person(99, "email", "fistName", "lastName")
+        Person toSave = new Person(99, "email", "fistName", "lastName")
         .addLoan(new Loan(99, 1, 99))
         .addLoan(new Loan(98, 1, 99))
         .addLoan(new Loan(97, 1, 99));
-        personDAO.savePerson(expected);
+        Person expected = (Person) personDAO.savePerson(toSave).getUnchecked();
 
 
         Person actual = personDAO.findPerson(expected.getId()).get();
@@ -106,11 +106,11 @@ class PersonDAOImplTest {
     @Test
     public void afterDeletingPerson_canAddPersonAgain(){
         Person p = new Person(99, "email", "fistName", "lastName");
-        personDAO.savePerson(p);
-        personDAO.deletePerson(p.getId());
-        personDAO.savePerson(p);
+        Try<Person> personSaved = personDAO.savePerson(p);
+        personDAO.deletePerson(personSaved.getUnchecked().getId());
+        Try<Person> secondSaved = personDAO.savePerson(p);
 
-        Optional<Person> actual = personDAO.findPerson(p.getId());
+        Optional<Person> actual = personDAO.findPerson(secondSaved.getUnchecked().getId());
         assertFalse(actual.isEmpty());
     }
 

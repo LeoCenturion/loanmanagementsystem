@@ -9,6 +9,9 @@ services:
       - ./db_volume:/var/lib/postgresql/data
     env_file:
       - postgres.env
-
+  service:
+    image: loanmanagement:latest
+    ports:
+      - "8080:8080"
 volumes:
   db_volume:

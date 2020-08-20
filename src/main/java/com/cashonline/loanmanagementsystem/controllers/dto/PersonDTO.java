@@ -10,6 +10,12 @@ import static java.util.stream.Collectors.toList;
 
 public class PersonDTO {
 
+    public PersonDTO(String email, String firstName, String lastName) {
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }
