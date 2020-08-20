@@ -10,7 +10,6 @@ create-tables:
 	docker run --network=loanmanagementsystem_default  -e PGPASSWORD=mysecretpassword  postgres:latest   psql -U postgres -h db -d postgres -c " $$(cat ./src/main/resources/create.sql)"
 .PHONY: create-tables
 
-
 populate-tables: create-tables
 	docker run --network=loanmanagementsystem_default  -e PGPASSWORD=mysecretpassword  postgres:latest   psql -U postgres -h db -d postgres -c " $$(cat ./src/main/resources/populate.sql)"
 .PHONY: populate-tables-tables
